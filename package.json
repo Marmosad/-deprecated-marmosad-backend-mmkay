@@ -1,0 +1,19 @@
+{
+  "name": "marmosad-backend",
+  "version": "1.0.0",
+  "description": "marmoset backend on node served from ngin",
+  "main": "index.js",
+  "scripts": {
+    "test": "marmosad test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gewenyu99/marmosad-backend.git"
+  },
+  "author": "marmosad team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gewenyu99/marmosad-backend/issues"
+  },
+  "homepage": "https://github.com/gewenyu99/marmosad-backend#readme"
+}
