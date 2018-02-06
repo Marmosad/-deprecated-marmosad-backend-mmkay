@@ -4,7 +4,7 @@
   "description": "marmoset backend on node served from ngin",
   "main": "index.js",
   "scripts": {
-    "start": "node your-script.js",
+    "start": "node ./app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
