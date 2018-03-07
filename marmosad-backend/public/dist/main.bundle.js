@@ -127,7 +127,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__splash_splash_component__ = __webpack_require__("../../../../../src/app/splash/splash.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__core_core_component__ = __webpack_require__("../../../../../src/app/core/core.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__splash_spash_nav_spash_nav_component__ = __webpack_require__("../../../../../src/app/splash/spash-nav/spash-nav.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__splash_splash_navigate_splash_navigate_component__ = __webpack_require__("../../../../../src/app/splash/splash-navigate/splash-navigate.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -155,7 +155,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__global_navbar_global_navbar_elements_global_navbar_elements_component__["a" /* GlobalNavbarElementsComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__splash_splash_component__["a" /* SplashComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__core_core_component__["a" /* CoreComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__splash_spash_nav_spash_nav_component__["a" /* SpashNavComponent */]
+                __WEBPACK_IMPORTED_MODULE_9__splash_splash_navigate_splash_navigate_component__["a" /* SplashNavigateComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -242,7 +242,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@import url('https://fonts.googleapis.com/css?family=Fascinate');\r\n.center-elements{\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n}\r\nh1{\r\n  margin: 1vw 0 0 0;\r\n  display: inline-block;\r\n  font-size: 3vw;\r\n  font-family: 'Fascinate', black, serif;\r\n  color: #e17055;\r\n  vertical-align: top;\r\n}\r\n.goose-icon{\r\n  display: inline-block;\r\n  padding: 0;\r\n  height: 6vw;\r\n  width: 6vw;\r\n  -webkit-box-shadow: 0vw 0vw 1vw black;\r\n          box-shadow: 0vw 0vw 1vw black;\r\n}\r\n", ""]);
+exports.push([module.i, "@import url('https://fonts.googleapis.com/css?family=Fascinate');\r\n.center-elements{\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n}\r\nh1{\r\n  margin: 1vw 0 0 0;\r\n  display: inline-block;\r\n  font-size: 3vw;\r\n  font-family: 'Fascinate', black, serif;\r\n  color: #e17055;\r\n  vertical-align: top;\r\n}\r\n.goose-icon{\r\n  display: inline-block;\r\n  padding: 0;\r\n  margin-right: 1vw;\r\n  height: 6vw;\r\n  width: 6vw;\r\n  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24);\r\n          box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24);\r\n}\r\n", ""]);
 
 // exports
 
@@ -303,7 +303,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#global-navbar-root{\r\n  height: 7vw;\r\n\tposition: relative;\r\n\tpadding: 0;\r\n\tmargin: 0;\r\n}\r\n#global-navbar-strip{\r\n\theight: 7vw;\r\n\twidth: 100vw;\r\n\tpadding: 0;\r\n  background: #FFEAA7;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%)\r\n}\r\n\r\n", ""]);
+exports.push([module.i, "#global-navbar-root{\r\n  height: 7vw;\r\n\tposition: relative;\r\n\tpadding: 0;\r\n\tmargin: 0;\r\n  -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);\r\n          box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);\r\n\r\n}\r\n#global-navbar-strip{\r\n\theight: 7vw;\r\n\twidth: 100vw;\r\n\tpadding: 0;\r\n  background: #FFEAA7;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%)\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -316,7 +316,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/global-navbar/global-navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"global-navbar-root\">\n\t<div id=\"global-navbar-strip\">\n    <app-global-navbar-elements></app-global-navbar-elements>\n\t</div>\n</div>\n"
+module.exports = "<div id=\"global-navbar-root\" [@navAnimationState] = 'getState'>\n\t<div id=\"global-navbar-strip\">\n    <app-global-navbar-elements></app-global-navbar-elements>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -326,6 +326,7 @@ module.exports = "<div id=\"global-navbar-root\">\n\t<div id=\"global-navbar-str
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GlobalNavbarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -336,16 +337,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var GlobalNavbarComponent = /** @class */ (function () {
     function GlobalNavbarComponent() {
+        this.show = true;
     }
     GlobalNavbarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.toggle();
+        }, 1);
+    };
+    Object.defineProperty(GlobalNavbarComponent.prototype, "getState", {
+        get: function () {
+            return this.show ? 'start' : 'end';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GlobalNavbarComponent.prototype.toggle = function () {
+        this.show = !this.show;
     };
     GlobalNavbarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-global-navbar',
             template: __webpack_require__("../../../../../src/app/global-navbar/global-navbar.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/global-navbar/global-navbar.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/global-navbar/global-navbar.component.css")],
+            animations: [
+                Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["j" /* trigger */])('navAnimationState', [
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["g" /* state */])('start', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                        transform: 'translateX(0) translateY(-100%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["g" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                        transform: 'translateX(0) translateY(0)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('600ms ease-in'))
+                ])
+            ]
         }),
         __metadata("design:paramtypes", [])
     ], GlobalNavbarComponent);
@@ -356,7 +384,7 @@ var GlobalNavbarComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/splash/spash-nav/spash-nav.component.css":
+/***/ "../../../../../src/app/splash/splash-navigate/splash-navigate.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -364,7 +392,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@import url('https://fonts.googleapis.com/css?family=Fascinate');\r\n.overlay {\r\n  margin: 0 0 0 0;\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 30vw;\r\n  width: 30vw;\r\n  opacity: 0;\r\n  -webkit-transition: .5s ease;\r\n  transition: .5s ease;\r\n  background-color: #006442;\r\n  color: #FFEAA7;\r\n  font-size: 5vw;\r\n  font-family: 'Fascinate', black;\r\n  text-align: center;\r\n  -webkit-user-select: none; /* Safari */\r\n  -moz-user-select: none; /* Firefox */\r\n  -ms-user-select: none; /* IE10+/Edge */\r\n  user-select: none;\r\n}\r\n.overlay:hover{\r\n  opacity: 0.9;\r\n  cursor: pointer;\r\n}\r\n#enter{\r\n  margin-top: 11vw;\r\n}\r\nh1 {\r\n  font-family: 'Fascinate', black;\r\n  display: inline-block;\r\n  horiz-align: center;\r\n  font-size: 5vw;\r\n}\r\n", ""]);
+exports.push([module.i, "  @import url('https://fonts.googleapis.com/css?family=Fascinate');\r\n\r\n#enter:hover, #about:hover, h1:hover{\r\n  background-color: white;\r\n  color: #ffa082;\r\n  cursor: pointer;\r\n}\r\n\r\n#enter:hover, #about:hover{\r\n  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n}\r\n\r\n#about, #enter{\r\n  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n          box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n  -webkit-transition: all 0.2s cubic-bezier(.25,.8,.25,1);\r\n  transition: all 0.2s cubic-bezier(.25,.8,.25,1);\r\n}\r\n\r\n#enter{\r\n  margin: 0 0 0 2vw;\r\n  float: left;\r\n  width: 15vw;\r\n  padding-right: 7vw;\r\n\r\n}\r\n\r\n#about{\r\n  float: right;\r\n  width: 15vw;\r\n  margin: 0 2vw 0 0;\r\n  padding-right: 7vw;\r\n}\r\n\r\nh1 {\r\n  margin: 0;\r\n  padding: 1vw 4vw;\r\n  height: 6vw;\r\n  background-color: #FFEAA7;\r\n  color: #e17055;\r\n  font-family: 'Fascinate', serif;\r\n  horiz-align: center;\r\n  font-size: 5vw;\r\n  width: 14vw;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n\r\n.overlay {\r\n  width: 55vw;\r\n  position: absolute;\r\n  top: 100%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -110%);\r\n          transform: translate(-50%, -110%);\r\n}\r\n", ""]);
 
 // exports
 
@@ -374,20 +402,21 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/splash/spash-nav/spash-nav.component.html":
+/***/ "../../../../../src/app/splash/splash-navigate/splash-navigate.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"overlay\" (click)=\"toCore()\">\n  <h1 id=\"enter\">Enter</h1>\n</div>\n<div>\n  <h1> Marmosad</h1>\n</div>\n"
+module.exports = "<div class=\"overlay\" (click)=\"toCore()\" [@splashButtonsAnimationState] = 'getState'>\n  <div id=\"enter\">\n    <h1>Enter</h1>\n  </div>\n  <div id=\"about\">\n    <h1>About</h1>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/splash/spash-nav/spash-nav.component.ts":
+/***/ "../../../../../src/app/splash/splash-navigate/splash-navigate.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpashNavComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashNavigateComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -399,25 +428,64 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var SpashNavComponent = /** @class */ (function () {
-    function SpashNavComponent(router) {
+
+var SplashNavigateComponent = /** @class */ (function () {
+    function SplashNavigateComponent(router) {
+        var _this = this;
         this.router = router;
+        this.show = true;
+        this.routeOut = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.animate = function (callRoute) {
+            console.log('redirecting to core');
+            _this.routeOut.emit(null);
+            _this.toggle();
+            setTimeout(function () {
+                callRoute();
+            }, 600);
+        };
+        this.route = function () {
+            _this.router.navigate(['/core']);
+        };
     }
-    SpashNavComponent.prototype.toCore = function () {
-        console.log('redirecting to core');
-        this.router.navigate(['/core']);
+    SplashNavigateComponent.prototype.toCore = function () {
+        this.animate(this.route);
     };
-    SpashNavComponent.prototype.ngOnInit = function () {
+    SplashNavigateComponent.prototype.ngOnInit = function () {
     };
-    SpashNavComponent = __decorate([
+    Object.defineProperty(SplashNavigateComponent.prototype, "getState", {
+        get: function () {
+            return this.show ? 'start' : 'end';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    SplashNavigateComponent.prototype.toggle = function () {
+        this.show = !this.show;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */])
+    ], SplashNavigateComponent.prototype, "routeOut", void 0);
+    SplashNavigateComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-spash-nav',
-            template: __webpack_require__("../../../../../src/app/splash/spash-nav/spash-nav.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/splash/spash-nav/spash-nav.component.css")]
+            selector: 'app-splash-navigate',
+            template: __webpack_require__("../../../../../src/app/splash/splash-navigate/splash-navigate.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/splash/splash-navigate/splash-navigate.component.css")],
+            animations: [
+                Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["j" /* trigger */])('splashButtonsAnimationState', [
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["g" /* state */])('start', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* style */])({
+                        transform: 'translateX(-50%) translateY(-50%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["g" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* style */])({
+                        transform: 'translateX(-200%) translateY(-50%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["i" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["e" /* animate */])('600ms ease-in'))
+                ])
+            ]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
-    ], SpashNavComponent);
-    return SpashNavComponent;
+    ], SplashNavigateComponent);
+    return SplashNavigateComponent;
 }());
 
 
@@ -432,7 +500,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@import url('https://fonts.googleapis.com/css?family=Fascinate');\r\nimg{\r\n  height: 30vw;\r\n  width: 30vw;\r\n  display: inline-block;\r\n  -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);\r\n          box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);\r\n  horiz-align: center;\r\n  -ms-flex-item-align: center;\r\n      align-self: center;\r\n}\r\nh1{\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n}\r\napp-spash-nav{\r\n  display: inline-block;\r\n  width: 30vw;\r\n  height: 5vw;\r\n  vertical-align: top;\r\n  horiz-align: center;\r\n  text-align: center;\r\n  color: #FFEAA7;\r\n}\r\n.splash-wrapper {\r\n  height: 40vw;\r\n  width: 30vw;\r\n\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n}\r\n", ""]);
+exports.push([module.i, "@import url('https://fonts.googleapis.com/css?family=Fascinate');\r\napp-splash{\r\n  width: 100vw;\r\n  height: 20vw;\r\n  border-style: solid;\r\n}\r\n.splash-wrapper {\r\n  height: 40vw;\r\n  width: 30vw;\r\n\r\n  position: absolute;\r\n  top: 30%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n}\r\n.center-elements{\r\n  width: 55vw;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  padding-bottom: 2vw;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n  border-bottom: 1vw solid #FFEAA7;\r\n}\r\nh1{\r\n  margin: 3vw 0 0 0;\r\n  display: inline-block;\r\n  font-size: 6vw;\r\n  font-family: 'Fascinate', serif;\r\n  color: #FFEAA7;\r\n  vertical-align: top;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n.goose-icon{\r\n  display: inline-block;\r\n  margin: 0 7vw 0 0;\r\n  height: 15vw;\r\n  width: 15vw;\r\n  -webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.12), 0 3px 9px rgba(0,0,0,0.24);\r\n          box-shadow: 0 3px 9px rgba(0,0,0,0.12), 0 3px 9px rgba(0,0,0,0.24);\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -445,7 +513,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/splash/splash.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"splash-wrapper\">\n  <img src=\"assets/goose.svg\" class=\"goose-icon\">\n  <app-spash-nav></app-spash-nav>\n</div>\n"
+module.exports = "<div class=\"splash-wrapper\">\n  <div class=\"center-elements\" [@splashAnimationState]='getState'>\n    <img src=\"assets/goose.svg\" class=\"goose-icon\">\n    <h1>Marmosad</h1>\n  </div>\n  <div class=\"nav-button\">\n    <app-splash-navigate (routeOut)=\"toggle()\"></app-splash-navigate>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -455,6 +523,7 @@ module.exports = "<div class=\"splash-wrapper\">\n  <img src=\"assets/goose.svg\
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -465,16 +534,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var SplashComponent = /** @class */ (function () {
     function SplashComponent() {
+        this.show = true;
     }
     SplashComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(SplashComponent.prototype, "getState", {
+        get: function () {
+            return this.show ? 'start' : 'end';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    SplashComponent.prototype.toggle = function () {
+        this.show = !this.show;
     };
     SplashComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-splash',
             template: __webpack_require__("../../../../../src/app/splash/splash.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/splash/splash.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/splash/splash.component.css")],
+            animations: [
+                Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["j" /* trigger */])('splashAnimationState', [
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["g" /* state */])('start', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                        transform: 'translateX(-50%) translateY(-50%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["g" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                        transform: 'translateX(100%) translateY(-50%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('600ms ease-in'))
+                ])
+            ]
         }),
         __metadata("design:paramtypes", [])
     ], SplashComponent);
