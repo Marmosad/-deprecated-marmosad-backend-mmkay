@@ -1,0 +1,23 @@
+{
+  "name": "marmosad-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gewenyu99/marmosad-backend.git"
+  },
+  "author": "Marmosad Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gewenyu99/marmosad-backend/issues"
+  },
+  "homepage": "https://github.com/gewenyu99/marmosad-backend#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  }
+}
