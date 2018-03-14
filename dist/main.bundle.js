@@ -128,12 +128,16 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__splash_splash_component__ = __webpack_require__("../../../../../src/app/splash/splash.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__core_core_component__ = __webpack_require__("../../../../../src/app/core/core.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__splash_splash_navigate_splash_navigate_component__ = __webpack_require__("../../../../../src/app/splash/splash-navigate/splash-navigate.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__core_chat_chat_component__ = __webpack_require__("../../../../../src/app/core/chat/chat.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -155,18 +159,92 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__global_navbar_global_navbar_elements_global_navbar_elements_component__["a" /* GlobalNavbarElementsComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__splash_splash_component__["a" /* SplashComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__core_core_component__["a" /* CoreComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__splash_splash_navigate_splash_navigate_component__["a" /* SplashNavigateComponent */]
+                __WEBPACK_IMPORTED_MODULE_9__splash_splash_navigate_splash_navigate_component__["a" /* SplashNavigateComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__core_chat_chat_component__["a" /* ChatComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__app_routing_module__["a" /* AppRoutingModule */]
             ],
-            providers: [],
+            providers: [__WEBPACK_IMPORTED_MODULE_11__socket_io_socket_io_service__["a" /* SocketIoService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/chat/chat.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/chat/chat.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h1>\n  {{testMsg}}\n</h1>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/chat/chat.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ChatComponent = /** @class */ (function () {
+    function ChatComponent(socketService) {
+        this.socketService = socketService;
+        this.testMsg = 'sup';
+        this.socketStart(socketService);
+    }
+    ChatComponent.prototype.ngOnInit = function () {
+    };
+    ChatComponent.prototype.socketStart = function (socketService) {
+        var _this = this;
+        socketService.initSocket();
+        this.ioConnection = this.socketService.onDong().subscribe(function (dong) {
+            _this.testMsg = dong;
+        });
+    };
+    ChatComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-chat',
+            template: __webpack_require__("../../../../../src/app/core/chat/chat.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/core/chat/chat.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
+    ], ChatComponent);
+    return ChatComponent;
 }());
 
 
@@ -194,7 +272,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/core.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-global-navbar></app-global-navbar>\n"
+module.exports = "<app-global-navbar></app-global-navbar>\n<app-chat></app-chat>\n"
 
 /***/ }),
 
@@ -378,6 +456,57 @@ var GlobalNavbarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], GlobalNavbarComponent);
     return GlobalNavbarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/socket-io/socket-io.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketIoService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__("../../../../socket.io-client/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var SocketIoService = /** @class */ (function () {
+    function SocketIoService() {
+        this.SERVER_URL = 'http://localhost:8080';
+    }
+    SocketIoService.prototype.initSocket = function () {
+        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL);
+        this.socket.emit('ding', 'get me back!');
+    };
+    SocketIoService.prototype.send = function (message) {
+        this.socket.emit('message', message);
+    };
+    SocketIoService.prototype.onDong = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.socket.on('dong', function (data) { return observer.next(data); });
+        });
+    };
+    SocketIoService.prototype.onMessage = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.socket.on('message', function (data) { return observer.next(data); });
+        });
+    };
+    SocketIoService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+    ], SocketIoService);
+    return SocketIoService;
 }());
 
 
@@ -620,6 +749,13 @@ Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* pl
 
 module.exports = __webpack_require__("../../../../../src/main.ts");
 
+
+/***/ }),
+
+/***/ 1:
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 

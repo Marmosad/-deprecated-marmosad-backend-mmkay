@@ -1,5 +1,6 @@
 var UserHandler = require('./userHandler.js');
 
+
 module.exports = function (io) {
     console.log('Socket start');
     io.sockets.on('connection', function (socket) {
