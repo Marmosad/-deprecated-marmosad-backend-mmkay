@@ -17,15 +17,15 @@ module.exports = function (io) {
             socket.emit('dong', currentUser.id + ' ' + currentUser.name);
         });
 
-        socket.on('privateMessage', function (data) {
+        socket.on('@', function (data) {
             var socketID = UserHandler.getSocketID(data.name);
             if(socketID){
                 socket.broadcast.to(socketID).emit('receivedMessage', {"msg":data.msg?data.msg:"", "from":currentUser.name});
-                socket.emit('msgSentSuccessfully', true);
+                socket.emit('msgSuccessful');
                 console.log(currentUser.name + ' sent ' + data.msg + ' to ' + data.name + ' successfully.');
             }
             else{
-                socket.emit('msgSentSuccessfully', false);
+                socket.emit('msgUnsuccessful');
                 console.log(currentUser.name + ' failed to send ' + data.msg + ' to ' + data.name);
             }
         });
