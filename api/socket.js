@@ -18,24 +18,26 @@ module.exports = function (io) {
             socket.emit('dong', currentUser.id + ' ' + currentUser.name);
         });
 
-        socket.on('@', function (data) {
-            var socketID = UserHandler.getSocketID(data.name);
-            if(socketID){
-                socket.broadcast.to(socketID).emit('receivedMessage', {"msg":data.msg?data.msg:"", "from":currentUser.name});
-                socket.emit('msgSuccessful');
-                console.log(currentUser.name + ' sent ' + data.msg + ' to ' + data.name + ' successfully.');
+        socket.on('sendMsg', function (data) {
+            if(!data.toward instanceof Array || !data.msg){
+                socket.emit('msgResult', {'success':false, 'error':'form incorrect'});
+                console.log(currentUser.name + ' sent unsuccessfully due to incorrect form.');
+                console.log(data.toward);
+                return;
             }
-            else{
-                socket.emit('msgUnsuccessful');
-                console.log(currentUser.name + ' failed to send ' + data.msg + ' to ' + data.name);
+            for(var i = data.toward.length-1; i >= 0; i--){
+                var socketID = UserHandler.getSocketID(data.toward[i]);
+                if(socketID){
+                    socket.broadcast.to(socketID).emit('receiveMsg', {"msg":data.msg?data.msg:"", "from":currentUser.name});
+                    socket.emit('msgResult', {'success':true, 'msg':data.msg, 'to':data.toward[i]});
+                    console.log(currentUser.name + ' sent ' + data.msg + ' to ' + data.toward[i] + ' successfully.');
+                }
+                else{
+                    socket.emit('msgResult', {'success':false, 'error':data.toward[i] + ' doesn\'t exit', 'msg':data.msg, 'to':data.toward[i]});
+                    console.log(currentUser.name + ' failed to send ' + data.msg + ' to ' + data.name);
+                }
             }
         });
-
-        socket.on('publicMessage', function (data) {
-            socket.broadcast.emit('receivedMessage', {"msg":data.msg?data.msg:"", "from":currentUser.name});
-            console.log(currentUser.name + ' sent ' + data.msg + ' publicly.');
-        });
-
 
         UserHandler.joined(currentUser, socket, io);
     });
