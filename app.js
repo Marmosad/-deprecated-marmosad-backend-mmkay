@@ -2,8 +2,10 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-require('./api/socket.js')(io);
+var mysql = require('mysql');
 
+require('./api/socket.js')(io);
+require('./core/core.js')();
 
 const path = require('path');
 const api = require('./api/api.js');
@@ -15,8 +17,23 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-http.listen(8080, function () {
-    console.log('listening on *: 8080');
+http.listen(8081, function () {
+    console.log('listening on *: 8081');
+});
+
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    port     : '8080',
+    database : 'CAH'
+});
+
+connection.connect(function(err) {
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+    }
+
+    console.log('connected as id ' + connection.threadId);
 });
 
 
