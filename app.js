@@ -4,6 +4,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mysql = require('mysql');
 
+var marmosad = require('./classes/board.js')();
+marmosad.constructor();
+// Needs a callback function
+
 require('./api/socket.js')(io);
 //require('./core/core.js')();
 

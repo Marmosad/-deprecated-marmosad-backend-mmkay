@@ -1,5 +1,3 @@
-var players = [];
-var sockets = {};
 
 module.exports = {
 
@@ -12,15 +10,15 @@ module.exports = {
         
         //io.emit('userJoin', {nick: user.nick});
     },
-
-    newUser: function (socket, io) {
+/*
+    updateUsers: function (socket, io) {
     	//One player joins, sends a list of player ID's and playercount to each player.
     	for(var i = 0; i < players.length; i++){
     		io.emit('player', players[i].id);
     	}
     	io.emit('player', 'Total Players: ' + players.length);
     },
-
+*/
     removeUser: function (user, socket, io) {
     	sockets[user.id].disconnect();
     	players.splice(players.indexOf(user));

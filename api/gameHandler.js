@@ -20,6 +20,14 @@ module.exports = {
 
     },
 
+    phase3: function (user, socket, io){
+
+    },
+
+    phase4: function (user, socket, io){
+
+    },
+
     endGame: function () {
 
     }
