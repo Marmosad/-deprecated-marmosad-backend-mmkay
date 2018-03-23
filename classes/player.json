@@ -1,0 +1,9 @@
+{
+  "name": "Name String",
+  "playerId": 127,
+  "hand": [
+    // 7x whiteCard.json
+  ],
+  "isJudge": false,
+  "score": 0
+}
