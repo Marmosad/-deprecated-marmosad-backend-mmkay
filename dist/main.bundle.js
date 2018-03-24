@@ -183,9 +183,10 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["d" /* MatListModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["d" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatListModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatFormFieldModule */],
                 __WEBPACK_IMPORTED_MODULE_14__angular_forms__["c" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
@@ -267,7 +268,7 @@ var BoardCoreComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/core/chat/chat.component.html":
 /***/ (function(module, exports) {
 
-module.exports = " <mat-card class=\"chat-card\" fxFlex>\r\n    <div class=\"chat-top\">\r\n      <h1>Chat</h1>\r\n    </div>\r\n    <div class=\"chat\">\r\n      <mat-list>\r\n        <mat-list-item *ngFor=\"let testMsg of testMsgs\">\r\n\r\n        </mat-list-item>\r\n      </mat-list>\r\n    </div>\r\n    <div class=\"input\">\r\n\r\n    </div>\r\n  </mat-card>\r\n"
+module.exports = " <mat-card class=\"chat-card\" fxFlex>\r\n    <div class=\"chat-top\">\r\n      <h1>Chat</h1>\r\n    </div>\r\n    <div class=\"chat-flex-wrapper\" fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n      <div class=\"chat\" fxFlex=\"80\">\r\n        <mat-list fxLayoutAlign=\"start none\" fxLayout=\"column\" >\r\n          <mat-list-item *ngFor=\"let message of messages\">\r\n            {{message}}\r\n          </mat-list-item>\r\n        </mat-list>\r\n      </div>\r\n      <input #input type=\"text\" class=\"chat-input\" id=\"name\" fxFlex = 10 fxFill\r\n             placeholder=\"Type a message\" (keyup.enter)=\"[sendMessage(input.value), input.value = '']\">\r\n    </div>\r\n  </mat-card>\r\n"
 
 /***/ }),
 
@@ -279,7 +280,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@import url(\"https://fonts.googleapis.com/css?family=Fascinate\");\n.chat-card {\n  margin: 0;\n  padding: 0; }\nh1 {\n  font-family: 'Fascinate', black, serif;\n  font-size: 2.5vh;\n  background-color: #ff5b5b;\n  margin: 0;\n  text-align: center;\n  color: #3b3e47; }\n", ""]);
+exports.push([module.i, "@import url(\"https://fonts.googleapis.com/css?family=Fascinate\");\n.chat-card {\n  margin: 0;\n  padding: 0;\n  overflow: hidden; }\nh1 {\n  font-family: 'Fascinate', black, serif;\n  font-size: 2.5vh;\n  background-color: #ff5b5b;\n  margin: 0;\n  text-align: center;\n  color: #3b3e47; }\nmat-list-item {\n  background-color: #ff8e88;\n  padding: 0;\n  margin-bottom: 3px;\n  margin-left: 2px;\n  margin-right: 2px;\n  color: white; }\nmat-list {\n  color: white;\n  padding: 0; }\n.chat {\n  overflow-y: scroll; }\n.chat-input {\n  margin: 0;\n  padding: 0;\n  border-bottom: #ff8e88;\n  border-style: solid;\n  border-width: 0 0 3px 0;\n  outline: 0 none;\n  text-indent: 10px; }\n", ""]);
 
 // exports
 
@@ -309,10 +310,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ChatComponent = /** @class */ (function () {
     function ChatComponent(socketService) {
+        var _this = this;
         this.socketService = socketService;
-        this.testMsg = 'sup';
-        this.testMsgs = ['hi', 'bye', 'joined', 'test', 'something really long to see how it does really long to see how it', 'bye'];
-        this.sendMessage = function () {
+        this.messages = [];
+        this.sendMessage = function (message) {
+            var packet = { msg: message, from: 'test' };
+            _this.socketService.send(packet);
+            // this.messages.push(message);
+            message = '';
         };
         this.socketStart(socketService);
     }
@@ -321,17 +326,10 @@ var ChatComponent = /** @class */ (function () {
     ChatComponent.prototype.socketStart = function (socketService) {
         var _this = this;
         socketService.initSocket();
-        this.ioConnection = this.socketService.onDong().subscribe(function (dong) {
-            _this.testMsg = dong;
+        this.ioConnection = this.socketService.onMessage().subscribe(function (message) {
+            _this.messages.push(message.from + ': ' + message.msg);
         });
     };
-    Object.defineProperty(ChatComponent.prototype, "getColor", {
-        get: function () {
-            return 'color: ThemePalette';
-        },
-        enumerable: true,
-        configurable: true
-    });
     ChatComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-chat',
@@ -707,7 +705,7 @@ var SocketIoService = /** @class */ (function () {
         this.socket.emit('ding', 'get me back!');
     };
     SocketIoService.prototype.send = function (message) {
-        this.socket.emit('message', message);
+        this.socket.emit('sendMsg', message);
     };
     SocketIoService.prototype.onDong = function () {
         var _this = this;
@@ -718,7 +716,9 @@ var SocketIoService = /** @class */ (function () {
     SocketIoService.prototype.onMessage = function () {
         var _this = this;
         return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
-            _this.socket.on('message', function (data) { return observer.next(data); });
+            _this.socket.on('message', function (data) {
+                observer.next(data);
+            });
         });
     };
     SocketIoService = __decorate([
