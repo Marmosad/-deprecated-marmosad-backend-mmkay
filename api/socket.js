@@ -1,46 +1,42 @@
-var UserHandler = require('./userHandler.js');
-var GameHandler = require('./gameHandler.js');
-var eh;
+var userHandler = require('./userHandler.js')();
+// var GameHandler = require('./gameHandler.js');
+// var eh;
+var chatHandler = require('./chatHandler.js');
+var board = require('../services/board.js')();
 
+module.exports = function () {
+    var io = require('../services/socketService.js')().io;
+    console.log(require('../services/socketService.js')().getNum());
 
-module.exports = function (io) {
+    console.log('socketService Started');
+    io.on('connection', function (socket) {
+        var playerName = socket.handshake.query.name;
+        userHandler.joined({
+            playerName: playerName,
+            socket: socket
+        }, socket.id);
 
-    console.log('Hello There');
-
-    io.sockets.on('connection', function (socket) {
-        socket.emit('welcome');
-
-        var name = socket.handshake.query.name;
-        var currentUser = {
-            id: socket.id,
-            name: name
-        };
-        console.log('Socket ' + currentUser.id + ' opened with name ' + currentUser.name + '.');
-        socket.broadcast.emit('userJoin', currentUser.id + ' ' + currentUser.name);
-
-        UserHandler.joined(currentUser, io);
-
-        io.emit('gameStatus', currentUser.name + ' joined the game');
-
-        UserHandler.newUser(socket, io);
-
-        console.log('sup ' + currentUser.name);
-
+        socket.on('sendMsg', function (data) {
+            console.log(data);
+            chatHandler.onMessage(data.msg, data.from);
+        });
+        /*
         socket.on('startGame', function () {
+
             socket.emit('gameStatus', 'Starting Game');
             GameHandler.startGame();
         });
 
-        socket.on('submitCard', function (whiteCard){
+        socket.on('submitCard', function (whiteCard) {
             console.log(currentUser.id + ': ' + whiteCard);
-            GameHandler.startGame();var currentUser = {
+            GameHandler.startGame();
+            var currentUser = {
                 id: socket.id,
                 name: name
             };
             socket.emit('gameStatus', currentUser.name + ' submitted their entry');
         });
-
-        UserHandler.joined(currentUser, socket, io);
+        */
     });
 };
 
