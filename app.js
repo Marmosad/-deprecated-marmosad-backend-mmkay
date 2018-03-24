@@ -1,15 +1,8 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var mysql = require('mysql');
-
-var marmosad = require('./classes/board.js')();
-marmosad.constructor();
-// Needs a callback function
-
-require('./api/socket.js')(io);
-//require('./core/core.js')();
+//var mysql = require('mysql');
+require('./services/coreService.js')(http);
 
 const path = require('path');
 const api = require('./api/api.js');
@@ -18,6 +11,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/api', api);
 
 app.get('/', function (req, res) {
+    console.log('serving files');
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
