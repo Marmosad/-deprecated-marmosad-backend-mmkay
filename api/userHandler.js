@@ -2,7 +2,6 @@ var instance;
 var board = require('../services/board.js')();
 module.exports = function () {
     if (!instance) {
-        console.log('instance initiated');
         instance = {
             joined: function (player, playerId) {
                 board.players[playerId] = player;

@@ -5,7 +5,6 @@ var board = require('../services/board.js')();
 
 module.exports = function () {
     var io = require('../services/socketService.js')().io;
-    console.log(require('../services/socketService.js')().getNum());
 
     console.log('socketService Started');
     io.on('connection', function (socket) {
