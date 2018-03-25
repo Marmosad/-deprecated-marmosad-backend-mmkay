@@ -15,6 +15,10 @@ module.exports = function () {
             console.log(data);
             chatHandler.onMessage(data.msg, data.from);
         });
+        socket.on('disconnect', function (reason) {
+            console.log(socket.id + ' ' + reason);
+            userHandler.removeUser(socket.id);
+        })
         /*
         socket.on('startGame', function () {
 
