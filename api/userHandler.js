@@ -17,10 +17,9 @@ module.exports = function () {
                     io.emit('player', 'Total Players: ' + players.length);
                 },
             */
-            removeUser: function (user, socket, io) {
-                sockets[user.id].disconnect();
-                players.splice(players.indexOf(user));
-                io.emit('player', user.id + " left the room");
+            removeUser: function (playerId) {
+                console.log('Player: '+ playerId + ' removed');
+                board.removePlayer(playerId);
             }
         };
     }
