@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-require('./services/coreService.js')();
+require('./services/coreService.js')(http);
 
 const path = require('path');
 const api = require('./api/api.js');
@@ -18,4 +18,4 @@ http.listen(8080, function () {
     console.log('listening on *: 8080');
 });
 
-require('./services/dbService.js')();
+require('./services/dbService.js')().start();

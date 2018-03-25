@@ -4,7 +4,10 @@ module.exports = function () {
         instance = {
             players : {},
             sockets : {},
-            instanceNumber: Math.random()
+            instanceNumber: Math.random(),
+            getPlayerName: function (socketId) {
+                return this.players[socketId].data.playerName;
+            }
         };
     }
     return instance;

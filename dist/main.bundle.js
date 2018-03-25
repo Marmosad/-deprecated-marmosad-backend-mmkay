@@ -212,7 +212,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".board-core{\r\n  padding: 0;\r\n  width: 100vw;\r\n  height: 56.25vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 177.78vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  position: absolute;\r\n  top:11vh;bottom:1vh; /* vertical center */\r\n  left:0;right:0; /* horizontal center */\r\n}\r\n\r\n.user-board{\r\n}\r\n\r\n.game-board{\r\n}\r\n", ""]);
+exports.push([module.i, ".board-core {\r\n  padding: 0;\r\n  width: 100vw;\r\n  height: 56.25vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 177.78vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  position: absolute;\r\n  top: 11vh;\r\n  bottom: 1vh; /* vertical center */\r\n  left: 0;\r\n  right: 0; /* horizontal center */\r\n}\r\n\r\n.user-board {\r\n}\r\n\r\n.game-board {\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 5.5vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n}\r\n\r\ninput{\r\n  margin: 5px;\r\n  width: 28vw;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n  font-size: 2.5vw;\r\n  border-width: 0 0 5px 0;\r\n  /* box-shadow: 0 3px 9px rgba(0,0,0,0.12), 0 3px 9px rgba(0,0,0,0.24); */\r\n}\r\n\r\ninput:focus {\r\n  border-color: #ff5b5b;\r\n  outline: 0 none;\r\n}\r\n\r\n.name-field-div {\r\n  padding: 0;\r\n  width: 30vw;\r\n  height: 18vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 177.78vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  position: absolute;\r\n  top: 11vh;\r\n  bottom: 1vh; /* vertical center */\r\n  left: 0;\r\n  right: 0; /* horizontal center */\r\n}\r\n\r\n.name-field-card{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n", ""]);
 
 // exports
 
@@ -225,7 +225,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/board-core/board-core.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"board-core\" fxLayout=\"row\">\r\n  <div fxLayout=\"row\" fxFill fxLayoutAlign=\"space-between stretch\">\r\n    <div class=\"user-board\" fxLayout=\"column\" fxFlex=\"20\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-score-board fxFlex=\"58\"></app-score-board>\r\n      <app-chat fxFlex=\"40\"></app-chat>\r\n    </div>\r\n    <div class=\"game-board\" fxLayout=\"column\" fxFlex=\"78\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-game-board fxFill></app-game-board>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<mat-card class=\"name-field-div\" *ngIf=\"!hasName\" fxLayout=\"column\">\r\n  <div class=\"name-field-top\"fxFlex=\"20\">\r\n    <h1>Enter Your Name!</h1>\r\n  </div>\r\n  <mat-card class=\"name-field-card\" fxFlex=\"\">\r\n    <input #input matInput placeholder=\"Wut's ur name?\" (keyup.enter)=\"[setPlayerName(input.value)]\">\r\n  </mat-card>\r\n</mat-card>\r\n\r\n<div class=\"board-core\" fxLayout=\"row\" *ngIf=\"hasName\">\r\n  <div fxLayout=\"row\" fxFill fxLayoutAlign=\"space-between stretch\">\r\n    <div class=\"user-board\" fxLayout=\"column\" fxFlex=\"20\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-score-board fxFlex=\"58\"></app-score-board>\r\n      <app-chat fxFlex=\"40\"></app-chat>\r\n    </div>\r\n    <div class=\"game-board\" fxLayout=\"column\" fxFlex=\"78\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-game-board fxFill></app-game-board>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -235,6 +235,7 @@ module.exports = "<div class=\"board-core\" fxLayout=\"row\">\r\n  <div fxLayout
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BoardCoreComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -245,8 +246,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var BoardCoreComponent = /** @class */ (function () {
-    function BoardCoreComponent() {
+    function BoardCoreComponent(socketService) {
+        var _this = this;
+        this.socketService = socketService;
+        this.setPlayerName = function (playerName) {
+            _this.playerName = playerName;
+            _this.hasName = true;
+            _this.socketService.setPlayerName(playerName);
+        };
     }
     BoardCoreComponent.prototype.ngOnInit = function () {
     };
@@ -256,7 +265,7 @@ var BoardCoreComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/core/board-core/board-core.component.html"),
             styles: [__webpack_require__("../../../../../src/app/core/board-core/board-core.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
     ], BoardCoreComponent);
     return BoardCoreComponent;
 }());
@@ -314,18 +323,18 @@ var ChatComponent = /** @class */ (function () {
         this.socketService = socketService;
         this.messages = [];
         this.sendMessage = function (message) {
-            var packet = { msg: message, from: 'test' };
+            var packet = { msg: message, from: _this.socketService.getSocketId() };
             _this.socketService.send(packet);
             // this.messages.push(message);
             message = '';
         };
-        this.socketStart(socketService);
+        this.socketStart();
     }
     ChatComponent.prototype.ngOnInit = function () {
     };
-    ChatComponent.prototype.socketStart = function (socketService) {
+    ChatComponent.prototype.socketStart = function () {
         var _this = this;
-        socketService.initSocket();
+        this.socketService.initSocket();
         this.ioConnection = this.socketService.onMessage().subscribe(function (message) {
             _this.messages.push(message.from + ': ' + message.msg);
         });
@@ -366,7 +375,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/core.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\" fxLayoutGap=\"40px\">\r\n  <app-global-navbar fxFlex=\"100%\"></app-global-navbar>\r\n\r\n  <app-board-core></app-board-core>\r\n</div>\r\n"
+module.exports = "<div fxLayout=\"column\" fxLayoutGap=\"40px\">\r\n  <app-global-navbar fxFlex=\"100%\"></app-global-navbar>\r\n  <app-board-core>\r\n\r\n  </app-board-core>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -414,7 +423,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".game-board-card{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\nh1{\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 2.5vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, ".game-board-card{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\nh1{\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 2.5vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n}\r\n", ""]);
 
 // exports
 
@@ -701,17 +710,17 @@ var SocketIoService = /** @class */ (function () {
         this.SERVER_URL = 'http://localhost:8080';
     }
     SocketIoService.prototype.initSocket = function () {
-        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL);
-        this.socket.emit('ding', 'get me back!');
+        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL, { query: 'name=' + this.playerName });
+        this.socket.emit('userJoined');
     };
     SocketIoService.prototype.send = function (message) {
         this.socket.emit('sendMsg', message);
     };
-    SocketIoService.prototype.onDong = function () {
-        var _this = this;
-        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
-            _this.socket.on('dong', function (data) { return observer.next(data); });
-        });
+    SocketIoService.prototype.setPlayerName = function (playerName) {
+        this.playerName = playerName;
+    };
+    SocketIoService.prototype.getSocketId = function () {
+        return this.socket.id;
     };
     SocketIoService.prototype.onMessage = function () {
         var _this = this;
