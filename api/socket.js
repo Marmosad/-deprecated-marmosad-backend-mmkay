@@ -9,10 +9,7 @@ module.exports = function () {
     console.log('socketService Started');
     io.on('connection', function (socket) {
         var playerName = socket.handshake.query.name;
-        userHandler.joined({
-            playerName: playerName,
-            socket: socket
-        }, socket.id);
+        userHandler.joined(playerName, socket, socket.id);
 
         socket.on('sendMsg', function (data) {
             console.log(data);
