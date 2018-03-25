@@ -1,11 +1,13 @@
 var instance;
 module.exports = function () {
     if (!instance) {
-        console.log('instance initiated');
         instance = {
             players : {},
             sockets : {},
-            instanceNumber: Math.random()
+            instanceNumber: Math.random(),
+            getPlayerName: function (socketId) {
+                return this.players[socketId].data.playerName;
+            }
         };
     }
     return instance;
