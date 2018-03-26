@@ -1,13 +1,24 @@
+
 module.exports = {
-    createBlackCard: function (user, io) {
-
+    createBlackCard: function () {
+        return {
+            "cardID": 111, // This should be a query
+            "body": "This is the contents of the card", // This should also be a query
+        }
     },
-
-    createWhiteCard: function (user, io) {
-
+    createWhiteCard: function (playerID) {
+        return {
+            "cardID": 222, // This should be a query
+            "body": "This is the contents of the card", // This should also be a query
+            "owner": playerID // This is a player.json id
+        }
     },
-    createCurrentDisplay: function (user, io) {
-
+    createCurrentDisplay: function (blackCard, judge, submissions) {
+        return {
+            "blackCard": blackCard, //This should be a black card object
+            "submissions": submissions,
+            "currentJudge": judge // The player ID of the person who is the judge
+        }
     },
     createPlayer: function (playerName, playerId, socket) {
         return {
