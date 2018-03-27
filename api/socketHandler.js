@@ -1,7 +1,8 @@
-var userHandler = require('./userHandler.js')();
-// var GameHandler = require('./gameHandler.js');
-var chatHandler = require('./chatHandler.js');
+var instance;
 var board = require('../services/board.js')();
+
+var userHandler = require('./userHandler.js')();
+var chatHandler = require('./chatHandler.js');
 
 module.exports = function () {
     var io = require('../services/socketService.js')().io;
@@ -18,7 +19,20 @@ module.exports = function () {
         socket.on('disconnect', function (reason) {
             console.log(socket.id + ' ' + reason);
             userHandler.removeUser(socket.id);
-        })
+        });
+        socket.on('startGame', function(){
+            var firstRound = board.startGame();
+            console.log(firstRound);
+            io.emit('startGame', firstRound);
+        });
+        socket.on('submission', function (card) {
+            console.log(card);
+            board.phase1(card);
+        });
+        socket.on('winner', function (card) {
+            console.log(card);
+            board.phase3(card);
+        });
         /*
         socket.on('startGame', function () {
 
