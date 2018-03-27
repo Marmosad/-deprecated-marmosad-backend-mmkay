@@ -1,9 +1,8 @@
-
 module.exports = {
     createBlackCard: function () {
         return {
             "cardID": 111, // This should be a query
-            "body": "This is the contents of the card", // This should also be a query
+            "body": "This is the contents of the card" // This should also be a query
         }
     },
     createWhiteCard: function (playerID) {
