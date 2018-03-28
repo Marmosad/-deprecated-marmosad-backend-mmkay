@@ -10,9 +10,11 @@ module.exports = function () {
             display : {},
 
             instanceNumber: Math.random(),
+
             getPlayerName: function (socketId) {
                 return this.players[socketId].data.playerName;
             },
+
             removePlayer: function (playerId) {
                 this.players[playerId].socket.disconnect(true);
                 delete this.players[playerId].socket;
@@ -32,8 +34,14 @@ module.exports = function () {
 
             phase1: function (whiteCard) {
                 //submission = whiteCard.parse;
+                var playerID = whiteCard.owner;
                 this.display.submissions.push(whiteCard);
-                delete this.players[whiteCard.owner].hand[whiteCard.cardID];
+
+                io.emit('players', this.players);
+
+                delete this.players[playerID].data.hand[whiteCard.cardID]; // FIX
+
+                io.emit('players', this.players);
 
                 if(display.submissions.length >= Object.keys(this.players).length - 1){
                     this.phase2();
@@ -48,7 +56,9 @@ module.exports = function () {
             phase3: function (whiteCard) {
                 this.players[whiteCard.owner].score += 1;
 
-                if(this.players[whiteCard.owner].score > 4){
+                io.emit('players', this.players);
+
+                if(this.players[whiteCard.owner].score > 4){ // This variable dictates how long the games go oops.
                     this.endGame(whiteCard.owner);
                 } else {
                     this.phase4();
@@ -62,9 +72,11 @@ module.exports = function () {
                 this.display.currentJudge = newJudgeID;
                 this.display.submissions = [];
 
+                io.emit('players', this.players);
+
                 for(var i = 0; i < Object.keys(this.players).length; i++){
                     var curPlayerID = Object.keys(this.players)[i];
-                    if(this.players[curPlayerID].hand.length < 7){
+                    if(this.players[curPlayerID].hand.length < 7){ // This variable dictates the hand size oops.
                         this.players[curPlayerID].hand.push(jsonHandler.createWhiteCard(curPlayerID));
                     }
                 }

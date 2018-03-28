@@ -20,13 +20,17 @@ module.exports = {
         }
     },
     createPlayer: function (playerName, playerId, socket) {
+        var hand = {};
+        for(var i = 0;  i < 7; i++){ // TODO: 7x whiteCard.json, wait for db int
+            var newCard = this.createWhiteCard(playerId);
+            hand[newCard.cardID + i] = newCard;
+        }
+
         return {
             data: {
                 "playerName": playerName,
                 "playerId": playerId,
-                "hand": [
-                    // TODO: 7x whiteCard.json, wait for db int
-                ],
+                "hand": hand,
                 "isJudge": false,
                 "score": 0
             },
