@@ -26,6 +26,8 @@ module.exports = {
             hand[newCard.cardID + i] = newCard;
         }
 
+        console.log(hand);
+
         return {
             data: {
                 "playerName": playerName,

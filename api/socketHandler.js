@@ -23,21 +23,27 @@ module.exports = function () {
         });
 
         socket.on('startGame', function(){
-            var firstRound = board.startGame();
+            board.startGame();
             console.log(board.players);
-            console.log(firstRound);
-            io.emit('startGame', firstRound);
         });
 
         socket.on('submission', function (card) {
-            console.log(card);
-            board.phase1(card);
+            var submission = Json.parse(card);
+            board.phase1(submission);
         });
 
         socket.on('winner', function (card) {
-            console.log(card);
+            var submission = Json.parse(card);
+            board.phase3(submission);
+        });
+
+        socket.on('testAll', function (card) {
+            board.startGame();
+            console.log(board.players);
+            board.phase1(card);
             board.phase3(card);
         });
+
     });
 };
 

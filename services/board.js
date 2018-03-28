@@ -26,25 +26,17 @@ module.exports = function () {
             startGame: function () {
                 var newCard = jsonHandler.createBlackCard();
                 var firstJudge = Object.keys(this.players)[0];
-                var submissions = [];
-                console.log(Object.keys(this.players)[0] + ' is the first judge');
+                var submissions = {};
+                console.log(Object.keys(this.players)[0] + ' is the first judge'); // Should be io.emit
                 this.display = jsonHandler.createCurrentDisplay(newCard, firstJudge, submissions);
-                return this.display;
             },
 
             phase1: function (whiteCard) {
-                //submission = whiteCard.parse;
-                var playerID = whiteCard.owner;
-                this.display.submissions.push(whiteCard);
+                this.display.submissions[whiteCard.cardID] = whiteCard;
+                delete this.players[whiteCard.owner].data.hand[whiteCard.cardID]; // FIX
 
-                io.emit('players', this.players);
-
-                delete this.players[playerID].data.hand[whiteCard.cardID]; // FIX
-
-                io.emit('players', this.players);
-
-                if(display.submissions.length >= Object.keys(this.players).length - 1){
-                    this.phase2();
+                if(Object.keys(this.display.submissions).length >= Object.keys(this.players).length - 1){
+                    //this.phase2();
                 }
             },
 
@@ -56,7 +48,7 @@ module.exports = function () {
             phase3: function (whiteCard) {
                 this.players[whiteCard.owner].score += 1;
 
-                io.emit('players', this.players);
+                //io.emit('players', this.players);
 
                 if(this.players[whiteCard.owner].score > 4){ // This variable dictates how long the games go oops.
                     this.endGame(whiteCard.owner);
@@ -72,20 +64,21 @@ module.exports = function () {
                 this.display.currentJudge = newJudgeID;
                 this.display.submissions = [];
 
-                io.emit('players', this.players);
+                //io.emit('players', this.players);
 
                 for(var i = 0; i < Object.keys(this.players).length; i++){
                     var curPlayerID = Object.keys(this.players)[i];
-                    if(this.players[curPlayerID].hand.length < 7){ // This variable dictates the hand size oops.
-                        this.players[curPlayerID].hand.push(jsonHandler.createWhiteCard(curPlayerID));
+                    if(Object.keys(this.players[curPlayerID].data.hand.length < 7)){ // This variable dictates the hand size oops.
+                        var newCard = jsonHandler.createWhiteCard(this.players[curPlayerID].data.playerId);
+                        this.players[curPlayerID].data.hand[newCard.cardID] = newCard;
                     }
                 }
 
-                this.phase2();
+                //this.phase2();
             },
 
-            endGame: function (winner) {
-                console.log(this.players[winner].name + ' won!')
+            endGame: function (winnerID) {
+                console.log(this.players[winnerID].name + ' won!')
                 // Not sure what to do here yet.
             }
 
