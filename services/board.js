@@ -2,17 +2,25 @@ var instance;
 
 var jsonHandler = require('../api/jsonHandler.js');
 var io = require('../services/socketService.js')().io;
+var stringify = require('json-stringify-safe');
 
 module.exports = function () {
     if (!instance) {
         instance = {
+
             players : {},
             display : {},
 
             instanceNumber: Math.random(),
+
+            constructor: function(){
+                this.display = jsonHandler.initializeCurrentDisplay();
+            },
+
             getPlayerName: function (socketId) {
                 return this.players[socketId].data.playerName;
             },
+
             removePlayer: function (playerId) {
                 this.players[playerId].socket.disconnect(true);
                 delete this.players[playerId].socket;
@@ -22,33 +30,37 @@ module.exports = function () {
             },
 
             startGame: function () {
-                var newCard = jsonHandler.createBlackCard();
-                var firstJudge = Object.keys(this.players)[0];
-                var submissions = [];
-                console.log(Object.keys(this.players)[0] + ' is the first judge');
-                this.display = jsonHandler.createCurrentDisplay(newCard, firstJudge, submissions);
-                return this.display;
+                this.display.blackCard = jsonHandler.createBlackCard();
+                this.currentJudge = Object.keys(this.players)[0];
+                console.log(Object.keys(this.players)[0] + ' is the first judge'); // Should be io.emit
             },
 
             phase1: function (whiteCard) {
-                //submission = whiteCard.parse;
-                this.display.submissions.push(whiteCard);
-                delete this.players[whiteCard.owner].hand[whiteCard.cardID];
+                var location = this.players[whiteCard.owner].data.hand.findIndex(function(element){
+                    if(whiteCard.cardId == element.cardId){
+                        return true;
+                    }
+                    return false;
+                });
+                delete this.players[whiteCard.owner].data.hand[location];
 
-                if(display.submissions.length >= Object.keys(this.players).length - 1){
+                if(this.display.submissions.length >= Object.keys(this.players).length - 1){
                     this.phase2();
+                    //console.log(this.display.players);
                 }
             },
 
             phase2: function () {
-                io.emit('display', this.display);
-                io.emit('players', this.players);
+                this.updateCurrentDisplayPlayers();
+                io.emit('display', stringify(this.display, null, 0));
             },
 
             phase3: function (whiteCard) {
-                this.players[whiteCard.owner].score += 1;
+                this.players[whiteCard.owner].data.score += 1;
 
-                if(this.players[whiteCard.owner].score > 4){
+                //io.emit('players', this.players);
+
+                if(this.players[whiteCard.owner].score > 4){ // This variable dictates how long the games go oops.
                     this.endGame(whiteCard.owner);
                 } else {
                     this.phase4();
@@ -62,18 +74,28 @@ module.exports = function () {
                 this.display.currentJudge = newJudgeID;
                 this.display.submissions = [];
 
+                //io.emit('players', this.players);
+
                 for(var i = 0; i < Object.keys(this.players).length; i++){
                     var curPlayerID = Object.keys(this.players)[i];
-                    if(this.players[curPlayerID].hand.length < 7){
-                        this.players[curPlayerID].hand.push(jsonHandler.createWhiteCard(curPlayerID));
+                    if(Object.keys(this.players[curPlayerID].data.hand.length < 7)){ // This variable dictates the hand size oops.
+                        var newCard = jsonHandler.createWhiteCard(this.players[curPlayerID].data.playerId);
+                        this.players[curPlayerID].data.hand[newCard.cardId] = newCard;
                     }
                 }
-
                 this.phase2();
             },
 
-            endGame: function (winner) {
-                console.log(this.players[winner].name + ' won!')
+            updateCurrentDisplayPlayers: function () {
+                this.display.players = [];
+                for (var i = 0; i < Object.keys(this.players).length; i++) {
+                    var curPlayerID = Object.keys(this.players)[i];
+                    this.display.players.push(this.players[curPlayerID].data);
+                }
+            }, //Decided to implement this as a function in the end cuz prior approach would only update display at user join time.
+
+            endGame: function (winnerID) {
+                console.log(this.players[winnerID].name + ' won!')
                 // Not sure what to do here yet.
             }
 

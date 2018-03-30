@@ -1,6 +1,7 @@
 module.exports = function (http) {
     require('./socketService.js')(http);
-    require('./board.js')();
+    var board = require('./board.js')();
+    board.constructor();
     require('../api/socketHandler.js')();
     // require('../api/userHandler.js')();
 };

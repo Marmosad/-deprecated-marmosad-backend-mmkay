@@ -16,40 +16,28 @@ module.exports = function () {
             console.log(data);
             chatHandler.onMessage(data.msg, data.from);
         });
+
         socket.on('disconnect', function (reason) {
             console.log(socket.id + ' ' + reason);
             userHandler.removeUser(socket.id);
         });
+
         socket.on('startGame', function(){
-            var firstRound = board.startGame();
-            console.log(firstRound);
-            io.emit('startGame', firstRound);
+            board.startGame();
         });
+
         socket.on('submission', function (card) {
-            console.log(card);
+            var submission = Json.parse(card);
+            board.phase1(submission);
+        });
+
+        socket.on('testAll', function (card) {
+            board.startGame();
             board.phase1(card);
-        });
-        socket.on('winner', function (card) {
-            console.log(card);
             board.phase3(card);
-        });
-        /*
-        socket.on('startGame', function () {
-
-            socket.emit('gameStatus', 'Starting Game');
-            GameHandler.startGame();
+            console.log(board.players);
         });
 
-        socket.on('submitCard', function (whiteCard) {
-            console.log(currentUser.id + ': ' + whiteCard);
-            GameHandler.startGame();
-            var currentUser = {
-                id: socket.id,
-                name: name
-            };
-            socket.emit('gameStatus', currentUser.name + ' submitted their entry');
-        });
-        */
     });
 };
 
