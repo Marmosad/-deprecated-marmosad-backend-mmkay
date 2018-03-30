@@ -24,7 +24,6 @@ module.exports = function () {
 
         socket.on('startGame', function(){
             board.startGame();
-            console.log(board.players);
         });
 
         socket.on('submission', function (card) {
@@ -32,16 +31,11 @@ module.exports = function () {
             board.phase1(submission);
         });
 
-        socket.on('winner', function (card) {
-            var submission = Json.parse(card);
-            board.phase3(submission);
-        });
-
         socket.on('testAll', function (card) {
             board.startGame();
-            console.log(board.players);
             board.phase1(card);
             board.phase3(card);
+            console.log(board.players);
         });
 
     });
