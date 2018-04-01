@@ -8,14 +8,20 @@ module.exports = function () {
     if (!instance) {
         instance = {
 
-            players : {},
-            display : {},
+            players: {},
+            display: {
+                "blackCard": null, //This should be a black card object
+                "submissions": [],
+                "currentJudge": null, // The player ID of the person who is the judge
+                "players": []
+            },
+
+            joinPlayer: function (player, playerId) {
+                this.players[playerId] = player;
+                this.display.players.push(player.data);
+            },
 
             instanceNumber: Math.random(),
-
-            constructor: function(){
-                this.display = jsonHandler.initializeCurrentDisplay();
-            },
 
             getPlayerName: function (socketId) {
                 return this.players[socketId].data.playerName;
@@ -36,22 +42,24 @@ module.exports = function () {
             },
 
             phase1: function (whiteCard) {
-                var location = this.players[whiteCard.owner].data.hand.findIndex(function(element){
-                    if(whiteCard.cardId == element.cardId){
-                        return true;
-                    }
-                    return false;
+                var playerIndex = this.display.players.findIndex(function (value) {
+                    return(value.playerId === whiteCard.owner);
+                });
+                var location = this.players[whiteCard.owner].data.hand.findIndex(function (element) {
+                    return (whiteCard.cardId === element.cardId)
                 });
                 delete this.players[whiteCard.owner].data.hand[location];
-
-                if(this.display.submissions.length >= Object.keys(this.players).length - 1){
+                this.display.players[playerIndex] = this.players[whiteCard.owner].data;
+                console.log(this.display.submissions.length);
+                console.log(Object.keys(this.players).length - 1);
+                if (this.display.submissions.length >= Object.keys(this.players).length - 1) {
                     this.phase2();
                     //console.log(this.display.players);
                 }
             },
 
             phase2: function () {
-                this.updateCurrentDisplayPlayers();
+                //this.updateCurrentDisplayPlayers();
                 io.emit('display', stringify(this.display, null, 0));
             },
 
@@ -60,7 +68,7 @@ module.exports = function () {
 
                 //io.emit('players', this.players);
 
-                if(this.players[whiteCard.owner].score > 4){ // This variable dictates how long the games go oops.
+                if (this.players[whiteCard.owner].score > 4) { // This variable dictates how long the games go oops.
                     this.endGame(whiteCard.owner);
                 } else {
                     this.phase4();
@@ -69,16 +77,16 @@ module.exports = function () {
 
             phase4: function () {
                 var newCard = jsonHandler.createBlackCard();
-                var newJudgeID = Object.keys(this.players)[Math.floor(Math.random()*Object.keys(this.players).length)];
+                var newJudgeID = Object.keys(this.players)[Math.floor(Math.random() * Object.keys(this.players).length)];
                 this.display.blackCard = newCard;
                 this.display.currentJudge = newJudgeID;
                 this.display.submissions = [];
 
                 //io.emit('players', this.players);
 
-                for(var i = 0; i < Object.keys(this.players).length; i++){
+                for (var i = 0; i < Object.keys(this.players).length; i++) {
                     var curPlayerID = Object.keys(this.players)[i];
-                    if(Object.keys(this.players[curPlayerID].data.hand.length < 7)){ // This variable dictates the hand size oops.
+                    if (Object.keys(this.players[curPlayerID].data.hand.length < 7)) { // This variable dictates the hand size oops.
                         var newCard = jsonHandler.createWhiteCard(this.players[curPlayerID].data.playerId);
                         this.players[curPlayerID].data.hand[newCard.cardId] = newCard;
                     }

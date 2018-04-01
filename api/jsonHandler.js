@@ -22,7 +22,7 @@ module.exports = {
         }
     },
 
-    createPlayer: function (playerName, playerId, socket) {
+    createPlayer: function (playerName, playerId, socket) { //this only creates a player
         var hand = [];
         for(var i = 0;  i < 7; i++){ // TODO: 7x whiteCard.json, wait for db int
             var newCard = this.createWhiteCard(playerId);

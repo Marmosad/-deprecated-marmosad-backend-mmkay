@@ -8,7 +8,7 @@ module.exports = function () {
         instance = {
             joined: function (playerName, socket, playerId) {
                 console.log('Player with name: ' + playerName + ' and id: ' + playerId + ' joined');
-                board.players[playerId] = jsonHandler.createPlayer(playerName, playerId, socket);
+                board.joinPlayer(jsonHandler.createPlayer(playerName, playerId, socket), playerId);// this only updates board
             },
 
             removeUser: function (playerId) {
