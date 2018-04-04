@@ -31,12 +31,12 @@ module.exports = function () {
 
         socket.on('submission', function (card) {
             var submission = Json.parse(card);
-            board.phase1(submission);
+            board.submission(submission);
         });
 
         socket.on('testAll', function (card) {
             board.startGame();
-            board.phase1(card);
+            board.submission(card);
             //board.phase3(card);
             console.log(board.display);
         });

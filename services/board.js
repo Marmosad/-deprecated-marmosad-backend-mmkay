@@ -1,18 +1,29 @@
 var instance;
-
 var jsonHandler = require('../api/jsonHandler.js');
 var io = require('../services/socketService.js')().io;
 var stringify = require('json-stringify-safe');
+const MAX_SCORE = 4;
 
 module.exports = function () {
     if (!instance) {
         instance = {
-
+            Phases: Object.freeze(
+                {
+                    "startGame": 0,
+                    "submission": 1,
+                    "judgement": 2,
+                    "updateScore": 3,
+                    "four": 4,
+                    "endGame": 5
+                }
+            ),
+            phase: 0,
+            currentJudge: 0,
             players: {},
             display: {
                 "blackCard": null, //This should be a black card object
                 "submissions": [],
-                "currentJudge": null, // The player ID of the person who is the judge
+                "currentJudge": '', // The player ID of the person who is the judge
                 "players": []
             },
 
@@ -37,70 +48,107 @@ module.exports = function () {
 
             startGame: function () {
                 this.display.blackCard = jsonHandler.createBlackCard();
-                this.currentJudge = Object.keys(this.players)[0];
+                this.players[Object.keys(this.players)[0]].data.isJudge = true;
+                this.display.currentJudge = this.players[Object.keys(this.players)[0]].data.playerId;
+                this.display.players[this.findPlayerInDisplay(this.display.currentJudge)] = true;
                 console.log(Object.keys(this.players)[0] + ' is the first judge'); // Should be io.emit
+                this.phase = this.Phases.submission;
             },
 
-            phase1: function (whiteCard) {
-                var playerIndex = this.display.players.findIndex(function (value) {
-                    return(value.playerId === whiteCard.owner);
-                });
-                var location = this.players[whiteCard.owner].data.hand.findIndex(function (element) {
+            submission: function (whiteCard) {
+                if (this.phase === this.Phases.submission) {
+                    return false;
+                }
+                var displayIndex = this.findPlayerInDisplay(whiteCard.owner);
+                var playerLocation = this.players[whiteCard.owner].data.hand.findIndex(function (element) {
                     return (whiteCard.cardId === element.cardId)
                 });
-                delete this.players[whiteCard.owner].data.hand[location];
-                this.display.players[playerIndex] = this.players[whiteCard.owner].data;
+                delete this.players[whiteCard.owner].data.hand[playerLocation];
+                this.display.players[displayIndex] = this.players[whiteCard.owner].data;
                 console.log(this.display.submissions.length);
                 console.log(Object.keys(this.players).length - 1);
+                this.updateCurrentDisplay();
                 if (this.display.submissions.length >= Object.keys(this.players).length - 1) {
-                    this.phase2();
-                    //console.log(this.display.players);
+                    this.phase = this.Phases.judgement;
                 }
+                return true; //error handling maybe? Can't hurt
             },
 
-            phase2: function () {
-                //this.updateCurrentDisplayPlayers();
-                io.emit('display', stringify(this.display, null, 0));
+            judgement: function (whiteCard) {
+                if (this.phase === this.Phases.judgement) {
+                    return false;
+                }
+                this.phase = this.Phases.updateScore;
+                this.updateScore(
+                    whiteCard.owner,
+                    this.findPlayerInDisplay(whiteCard.owner)
+                );
+                return true;
             },
 
-            phase3: function (whiteCard) {
-                this.players[whiteCard.owner].data.score += 1;
-
+            updateScore: function (playerLocation, displayIndex) {
+                if (this.phase === this.Phases.updateScore) {
+                    return false;
+                }
+                this.players[playerLocation].data.score += 1;
+                this.display.players[displayIndex] = this.players[playerLocation].data;
                 //io.emit('players', this.players);
 
-                if (this.players[whiteCard.owner].score > 4) { // This variable dictates how long the games go oops.
-                    this.endGame(whiteCard.owner);
+                if (this.players[playerLocation].score > MAX_SCORE) { // This variable dictates how long the games go oops.
+                    this.endGame(playerLocation);
                 } else {
+                    this.phase = this.Phases.four;
                     this.phase4();
                 }
+                this.phase = this.Phases.four;
+                return true;
             },
 
             phase4: function () {
+                if (this.phase === this.Phases.four) {
+                    return false;
+                }
                 var newCard = jsonHandler.createBlackCard();
-                var newJudgeID = Object.keys(this.players)[Math.floor(Math.random() * Object.keys(this.players).length)];
+                var newJudgeID = Object.keys(this.players)[Math.round(Math.floor(Math.random()
+                    * Object.keys(this.players).length))];
+                this.players[currentJudge].data.isJudge = true;
+                this.players[this.display.currentJudge].data.isJudge = false; // this is to remove prev judge
                 this.display.blackCard = newCard;
-                this.display.currentJudge = newJudgeID;
+                this.display.currentJudge = newJudgeID.toString();
                 this.display.submissions = [];
 
-                //io.emit('players', this.players);
+
+                // TODO: remember to change currentJudge
 
                 for (var i = 0; i < Object.keys(this.players).length; i++) {
                     var curPlayerID = Object.keys(this.players)[i];
                     if (Object.keys(this.players[curPlayerID].data.hand.length < 7)) { // This variable dictates the hand size oops.
-                        var newCard = jsonHandler.createWhiteCard(this.players[curPlayerID].data.playerId);
-                        this.players[curPlayerID].data.hand[newCard.cardId] = newCard;
+                        this.players[curPlayerID].data.hand[newCard.cardId] =
+                            jsonHandler.createWhiteCard(this.players[curPlayerID].data.playerId);
                     }
                 }
-                this.phase2();
+                this.updatePlayersInDisplay();
+                this.phase = submissions;
+                return true;
             },
 
-            updateCurrentDisplayPlayers: function () {
+            updatePlayersInDisplay: function () {
                 this.display.players = [];
                 for (var i = 0; i < Object.keys(this.players).length; i++) {
-                    var curPlayerID = Object.keys(this.players)[i];
-                    this.display.players.push(this.players[curPlayerID].data);
+                    this.display.players.push(Object.keys(this.players)[i].data);
                 }
+            },
+
+            updateCurrentDisplay: function () {
+                io.emit('display', stringify(this.display, null, 0));
             }, //Decided to implement this as a function in the end cuz prior approach would only update display at user join time.
+
+            findPlayerInDisplay: function (playerId) {
+                return this.display.players.findIndex(function (value) {
+                        return (value.playerId === playerId);
+                    }
+                )
+            },
 
             endGame: function (winnerID) {
                 console.log(this.players[winnerID].name + ' won!')
