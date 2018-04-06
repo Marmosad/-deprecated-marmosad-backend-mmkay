@@ -126,26 +126,28 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/esm5/animations.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__ = __webpack_require__("../../../flex-layout/esm5/flex-layout.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__global_navbar_global_navbar_component__ = __webpack_require__("../../../../../src/app/global-navbar/global-navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_navbar_global_navbar_elements_global_navbar_elements_component__ = __webpack_require__("../../../../../src/app/global-navbar/global-navbar-elements/global-navbar-elements.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__splash_splash_component__ = __webpack_require__("../../../../../src/app/splash/splash.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__core_core_component__ = __webpack_require__("../../../../../src/app/core/core.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__splash_splash_navigate_splash_navigate_component__ = __webpack_require__("../../../../../src/app/splash/splash-navigate/splash-navigate.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__core_chat_chat_component__ = __webpack_require__("../../../../../src/app/core/chat/chat.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__core_score_board_score_board_component__ = __webpack_require__("../../../../../src/app/core/score-board/score-board.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__core_board_core_board_core_component__ = __webpack_require__("../../../../../src/app/core/board-core/board-core.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__core_game_board_game_board_component__ = __webpack_require__("../../../../../src/app/core/game-board/game-board.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material_button__ = __webpack_require__("../../../material/esm5/button.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_flex_layout__ = __webpack_require__("../../../flex-layout/esm5/flex-layout.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__global_navbar_global_navbar_component__ = __webpack_require__("../../../../../src/app/global-navbar/global-navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__global_navbar_global_navbar_elements_global_navbar_elements_component__ = __webpack_require__("../../../../../src/app/global-navbar/global-navbar-elements/global-navbar-elements.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__splash_splash_component__ = __webpack_require__("../../../../../src/app/splash/splash.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__core_core_component__ = __webpack_require__("../../../../../src/app/core/core.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__splash_splash_navigate_splash_navigate_component__ = __webpack_require__("../../../../../src/app/splash/splash-navigate/splash-navigate.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__core_chat_chat_component__ = __webpack_require__("../../../../../src/app/core/chat/chat.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__core_score_board_score_board_component__ = __webpack_require__("../../../../../src/app/core/score-board/score-board.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__core_board_core_board_core_component__ = __webpack_require__("../../../../../src/app/core/board-core/board-core.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__core_game_board_game_board_component__ = __webpack_require__("../../../../../src/app/core/game-board/game-board.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -170,31 +172,32 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__global_navbar_global_navbar_component__["a" /* GlobalNavbarComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__global_navbar_global_navbar_elements_global_navbar_elements_component__["a" /* GlobalNavbarElementsComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__splash_splash_component__["a" /* SplashComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__core_core_component__["a" /* CoreComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__splash_splash_navigate_splash_navigate_component__["a" /* SplashNavigateComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__core_chat_chat_component__["a" /* ChatComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__core_score_board_score_board_component__["a" /* ScoreBoardComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__core_board_core_board_core_component__["a" /* BoardCoreComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__core_game_board_game_board_component__["a" /* GameBoardComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__global_navbar_global_navbar_component__["a" /* GlobalNavbarComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__global_navbar_global_navbar_elements_global_navbar_elements_component__["a" /* GlobalNavbarElementsComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__splash_splash_component__["a" /* SplashComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__core_core_component__["a" /* CoreComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__splash_splash_navigate_splash_navigate_component__["a" /* SplashNavigateComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__core_chat_chat_component__["a" /* ChatComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__core_score_board_score_board_component__["a" /* ScoreBoardComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__core_board_core_board_core_component__["a" /* BoardCoreComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__core_game_board_game_board_component__["a" /* GameBoardComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material_button__["a" /* MatButtonModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["d" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatListModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatIconModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_14__angular_forms__["c" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_15__angular_forms__["c" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_8__app_routing_module__["a" /* AppRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__["a" /* FlexLayoutModule */]
+                __WEBPACK_IMPORTED_MODULE_9__app_routing_module__["a" /* AppRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_flex_layout__["a" /* FlexLayoutModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_13__socket_io_socket_io_service__["a" /* SocketIoService */]],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_14__socket_io_socket_io_service__["a" /* SocketIoService */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -212,7 +215,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".board-core {\r\n  padding: 0;\r\n  width: 100vw;\r\n  height: 56.25vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 177.78vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  position: absolute;\r\n  top: 11vh;\r\n  bottom: 1vh; /* vertical center */\r\n  left: 0;\r\n  right: 0; /* horizontal center */\r\n}\r\n\r\n.user-board {\r\n}\r\n\r\n.game-board {\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 5.5vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n}\r\n\r\ninput{\r\n  margin: 5px;\r\n  width: 28vw;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n  font-size: 2.5vw;\r\n  border-width: 0 0 5px 0;\r\n  /* box-shadow: 0 3px 9px rgba(0,0,0,0.12), 0 3px 9px rgba(0,0,0,0.24); */\r\n}\r\n\r\ninput:focus {\r\n  border-color: #ff5b5b;\r\n  outline: 0 none;\r\n}\r\n\r\n.name-field-div {\r\n  padding: 0;\r\n  width: 30vw;\r\n  height: 18vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 177.78vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  position: absolute;\r\n  top: 11vh;\r\n  bottom: 1vh; /* vertical center */\r\n  left: 0;\r\n  right: 0; /* horizontal center */\r\n}\r\n\r\n.name-field-card{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n", ""]);
+exports.push([module.i, ".board-core {\r\n  position: absolute;\r\n  padding: 0;\r\n  width: 100vw;\r\n  height: 56.25vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 190vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  top: 11vh;\r\n  bottom: 1vh; /* vertical center */\r\n  left: 0;\r\n  right: 0; /* horizontal center */\r\n  z-index: -1000;\r\n}\r\n\r\n.user-board {\r\n}\r\n\r\n.game-board {\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 5.5vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n}\r\n\r\ninput{\r\n  margin: 5px;\r\n  width: 28vw;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%);\r\n  font-size: 2.5vw;\r\n  border-width: 0 0 5px 0;\r\n  /* box-shadow: 0 3px 9px rgba(0,0,0,0.12), 0 3px 9px rgba(0,0,0,0.24); */\r\n}\r\n\r\ninput:focus {\r\n  border-color: #ff5b5b;\r\n  outline: 0 none;\r\n}\r\n\r\n.name-field-div {\r\n  padding: 0;\r\n  width: 30vw;\r\n  height: 18vw; /* height:width ratio = 9/16 = .5625  */\r\n  max-height: 85vh;\r\n  max-width: 177.78vh; /* 16/9 = 1.778 */\r\n  margin: auto;\r\n  position: absolute;\r\n  top: 11vh;\r\n  bottom: 1vh; /* vertical center */\r\n  left: 0;\r\n  right: 0; /* horizontal center */\r\n}\r\n\r\n.name-field-card{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n", ""]);
 
 // exports
 
@@ -225,7 +228,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/board-core/board-core.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"name-field-div\" *ngIf=\"!hasName\" fxLayout=\"column\">\r\n  <div class=\"name-field-top\"fxFlex=\"20\">\r\n    <h1>Enter Your Name!</h1>\r\n  </div>\r\n  <mat-card class=\"name-field-card\" fxFlex=\"\">\r\n    <input #input matInput placeholder=\"Wut's ur name?\" (keyup.enter)=\"[setPlayerName(input.value)]\">\r\n  </mat-card>\r\n</mat-card>\r\n\r\n<div class=\"board-core\" fxLayout=\"row\" *ngIf=\"hasName\">\r\n  <div fxLayout=\"row\" fxFill fxLayoutAlign=\"space-between stretch\">\r\n    <div class=\"user-board\" fxLayout=\"column\" fxFlex=\"20\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-score-board fxFlex=\"58\"></app-score-board>\r\n      <app-chat fxFlex=\"40\"></app-chat>\r\n    </div>\r\n    <div class=\"game-board\" fxLayout=\"column\" fxFlex=\"78\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-game-board fxFill></app-game-board>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<mat-card class=\"name-field-div\" *ngIf=\"!hasName\" fxLayout=\"column\" [@nameAnimationState] = 'getNameState'>\r\n  <div class=\"name-field-top\"fxFlex=\"20\">\r\n    <h1>Enter Your Name!</h1>\r\n  </div>\r\n  <mat-card class=\"name-field-card\" fxFlex=\"\">\r\n    <input #input matInput placeholder=\"Wut's ur name?\" (keyup.enter)=\"[setPlayerName(input.value)]\">\r\n  </mat-card>\r\n</mat-card>\r\n\r\n<div class=\"board-core\" fxLayout=\"row\" *ngIf=\"hasName\" [@boardAnimationState] = 'getBoardState'>\r\n  <div fxLayout=\"row\" fxFill fxLayoutAlign=\"space-between stretch\">\r\n    <div class=\"user-board\" fxLayout=\"column\" fxFlex=\"18\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-score-board fxFlex=\"58\"></app-score-board>\r\n      <app-chat fxFlex=\"40\"></app-chat>\r\n    </div>\r\n    <div class=\"game-board\" fxLayout=\"column\" fxFlex=\"81\" fxLayoutAlign=\"space-between stretch\">\r\n      <app-game-board fxFill></app-game-board>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -236,6 +239,7 @@ module.exports = "<mat-card class=\"name-field-div\" *ngIf=\"!hasName\" fxLayout
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BoardCoreComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -247,23 +251,79 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var BoardCoreComponent = /** @class */ (function () {
     function BoardCoreComponent(socketService) {
         var _this = this;
         this.socketService = socketService;
+        this.showName = true;
+        this.hasName = false;
+        this.showBoard = false;
         this.setPlayerName = function (playerName) {
-            _this.playerName = playerName;
-            _this.hasName = true;
-            _this.socketService.setPlayerName(playerName);
+            _this.toggleName();
+            setTimeout(function () {
+                _this.playerName = playerName;
+                _this.hasName = true;
+                _this.socketService.setPlayerName(playerName);
+                setTimeout(function () {
+                    _this.toggleBoard();
+                }, 10);
+            }, 300);
         };
+        socketService.createFakeDisplay(4);
     }
     BoardCoreComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.toggleName();
+        }, 1);
+    };
+    Object.defineProperty(BoardCoreComponent.prototype, "getNameState", {
+        get: function () {
+            return this.showName ? 'start' : 'end';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BoardCoreComponent.prototype.toggleName = function () {
+        this.showName = !this.showName;
+    };
+    Object.defineProperty(BoardCoreComponent.prototype, "getBoardState", {
+        get: function () {
+            return this.showBoard ? 'end' : 'start';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    BoardCoreComponent.prototype.toggleBoard = function () {
+        this.showBoard = !this.showBoard;
     };
     BoardCoreComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-board-core',
             template: __webpack_require__("../../../../../src/app/core/board-core/board-core.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/core/board-core/board-core.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/core/board-core/board-core.component.css")],
+            animations: [
+                Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["k" /* trigger */])('nameAnimationState', [
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* state */])('start', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["i" /* style */])({
+                        transform: 'translateX(0%) translateY(180%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["i" /* style */])({
+                        transform: 'translateX(0%) translateY(0%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["j" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["e" /* animate */])('500ms ease-in')),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["j" /* transition */])('end => start', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["e" /* animate */])('300ms ease-in'))
+                ]),
+                Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["k" /* trigger */])('boardAnimationState', [
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* state */])('start', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["i" /* style */])({
+                        transform: 'translateX(0%) translateY(-170%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["i" /* style */])({
+                        transform: 'translateX(0%) translateY(0%)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["j" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["e" /* animate */])('400ms ease-in')),
+                ])
+            ]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
     ], BoardCoreComponent);
@@ -277,7 +337,7 @@ var BoardCoreComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/core/chat/chat.component.html":
 /***/ (function(module, exports) {
 
-module.exports = " <mat-card class=\"chat-card\" fxFlex>\r\n    <div class=\"chat-top\">\r\n      <h1>Chat</h1>\r\n    </div>\r\n    <div class=\"chat-flex-wrapper\" fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n      <div class=\"chat\" fxFlex=\"80\">\r\n        <mat-list fxLayoutAlign=\"start none\" fxLayout=\"column\" >\r\n          <mat-list-item *ngFor=\"let message of messages\">\r\n            {{message}}\r\n          </mat-list-item>\r\n        </mat-list>\r\n      </div>\r\n      <input #input type=\"text\" class=\"chat-input\" id=\"name\" fxFlex = 10 fxFill\r\n             placeholder=\"Type a message\" (keyup.enter)=\"[sendMessage(input.value), input.value = '']\">\r\n    </div>\r\n  </mat-card>\r\n"
+module.exports = " <mat-card class=\"chat-card\" fxFlex>\r\n    <div class=\"chat-top\">\r\n      <h1>Chat</h1>\r\n    </div>\r\n    <div class=\"chat-flex-wrapper\" fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n      <div class=\"chat\" fxFlex=\"78\">\r\n        <mat-list fxLayoutAlign=\"start none\" fxLayout=\"column\" >\r\n          <mat-list-item *ngFor=\"let message of messages\">\r\n            {{message}}\r\n          </mat-list-item>\r\n        </mat-list>\r\n      </div>\r\n      <input #input type=\"text\" class=\"chat-input\" id=\"name\" fxFlex = 10 fxFill\r\n             placeholder=\"Type a message\" (keyup.enter)=\"[sendMessage(input.value), input.value = '']\">\r\n    </div>\r\n  </mat-card>\r\n"
 
 /***/ }),
 
@@ -289,7 +349,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@import url(\"https://fonts.googleapis.com/css?family=Fascinate\");\n.chat-card {\n  margin: 0;\n  padding: 0;\n  overflow: hidden; }\nh1 {\n  font-family: 'Fascinate', black, serif;\n  font-size: 2.5vh;\n  background-color: #ff5b5b;\n  margin: 0;\n  text-align: center;\n  color: #3b3e47; }\nmat-list-item {\n  background-color: #ff8e88;\n  padding: 0;\n  margin-bottom: 3px;\n  margin-left: 2px;\n  margin-right: 2px;\n  color: white; }\nmat-list {\n  color: white;\n  padding: 0; }\n.chat {\n  overflow-y: scroll; }\n.chat-input {\n  margin: 0;\n  padding: 0;\n  border-bottom: #ff8e88;\n  border-style: solid;\n  border-width: 0 0 3px 0;\n  outline: 0 none;\n  text-indent: 10px; }\n", ""]);
+exports.push([module.i, "@import url(\"https://fonts.googleapis.com/css?family=Fascinate\");\n.chat-card {\n  margin: 0;\n  padding: 0; }\nh1 {\n  font-family: 'Fascinate', black, serif;\n  font-size: 3vh;\n  background-color: #ff5b5b;\n  margin: 0;\n  text-align: center;\n  color: #3b3e47;\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }\nmat-list-item {\n  background-color: #ff8e88;\n  padding: 0;\n  margin-bottom: 3px;\n  margin-left: 2px;\n  margin-right: 2px;\n  color: white; }\nmat-list {\n  color: white;\n  padding: 0; }\n.chat {\n  overflow-y: scroll; }\n.chat-input {\n  margin: 0;\n  padding: 0;\n  border-bottom: #b0bebe;\n  border-style: solid;\n  border-width: 0 0 5px 0;\n  outline: 0 none;\n  text-indent: 10px; }\n.chat-input:hover {\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n  border-bottom-color: #ff8e88; }\n.chat-input:focus {\n  -webkit-box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16), 0 6px 9px rgba(0, 0, 0, 0.23);\n          box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16), 0 6px 9px rgba(0, 0, 0, 0.23);\n  border-bottom: #ff5b5b;\n  border-style: solid;\n  border-width: 0 0 5px 0; }\n", ""]);
 
 // exports
 
@@ -423,7 +483,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".game-board-card{\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\nh1{\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 2.5vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n}\r\n", ""]);
+exports.push([module.i, ".game-board-card {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n}\r\n\r\n.card {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);\r\n          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n  border-bottom: #ff5b5b 0.5vw solid;\r\n}\r\n\r\n.card:hover {\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n}\r\n\r\n.submissions {\r\n}\r\n\r\n.hand {\r\n  padding: 1vh 0 2vh 0;\r\n}\r\n\r\n.controls {\r\n  padding-bottom: 10px;\r\n}\r\n\r\nbutton{\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n}\r\n\r\nbutton:hover{\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n  background-color: white;\r\n  color: #ff5b5b;\r\n  cursor: pointer;\r\n}\r\n", ""]);
 
 // exports
 
@@ -436,7 +496,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/game-board/game-board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"game-board-card\" fxFill>\r\n  <div class=\"score-top\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\" fxLayoutAlign=\"space-between stretch\" >\r\n  <div class=\"game-board-top\"fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"40\" class=\"submissions\">\r\n\r\n  </div>\r\n  <div fxFlex=\"40\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"card\" *ngFor=\"let card of hand\" fxFlex>\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -446,6 +506,7 @@ module.exports = "<mat-card class=\"game-board-card\" fxFill>\r\n  <div class=\"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameBoardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -456,18 +517,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var GameBoardComponent = /** @class */ (function () {
-    function GameBoardComponent() {
+    function GameBoardComponent(socketService) {
+        this.display = socketService.getDisplay;
+        this.hand = this.display.players[0].hand;
+        // this.hand = this.display.players[this.display.players.find((elem) => {
+        //   return (elem.playerId === socketService.socketId);
+        // })].hand;
     }
     GameBoardComponent.prototype.ngOnInit = function () {
     };
+    Object.defineProperty(GameBoardComponent.prototype, "getDisplay", {
+        get: function () {
+            return this.display;
+        },
+        enumerable: true,
+        configurable: true
+    });
     GameBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-game-board',
             template: __webpack_require__("../../../../../src/app/core/game-board/game-board.component.html"),
             styles: [__webpack_require__("../../../../../src/app/core/game-board/game-board.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
     ], GameBoardComponent);
     return GameBoardComponent;
 }());
@@ -479,7 +553,7 @@ var GameBoardComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/core/score-board/score-board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"score-card\" fxFlex>\r\n  <div class=\"score-top\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"score-card\" fxFlex  fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n  <div class=\"score-top\" fxFlex=\"10\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n  <div class=\"scores\" fxFlex=\"90\" fxLayoutAlign=\"start stretch\" fxLayout=\"column\">\r\n    <mat-list fxLayoutAlign=\"start stretch\" fxLayout=\"column\" >\r\n      <mat-list-item *ngFor=\"let player of getPlayers\" fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"40px\">\r\n        <div class=\"score-row\" fxFlex fxLayout=\"row\" fxLayoutAlign=\"space-between stretch\">\r\n          <h2 fxFlex=\"60\">{{player.playerName}}</h2> <h2 fxFlex=\"30\">: </h2> <h2 fxFlex=\"10\">{{player.score}}</h2>\r\n        </div>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -491,7 +565,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@import url(\"https://fonts.googleapis.com/css?family=Fascinate\");\n.score-card {\n  margin: 0;\n  padding: 0; }\nh1 {\n  font-family: 'Fascinate', black, serif;\n  font-size: 2.5vh;\n  background-color: #ff5b5b;\n  margin: 0;\n  text-align: center;\n  color: #3b3e47; }\n", ""]);
+exports.push([module.i, "@import url(\"https://fonts.googleapis.com/css?family=Fascinate\");\n@import url(\"https://fonts.googleapis.com/css?family=Share+Tech\");\n.score-card {\n  margin: 0;\n  padding: 0; }\n.scores {\n  margin: 0;\n  padding: 0;\n  color: #263237; }\nh1 {\n  font-family: 'Fascinate', black, serif;\n  font-size: 3vh;\n  background-color: #ff5b5b;\n  margin: 0;\n  text-align: center;\n  color: #3b3e47;\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }\nmat-list-item {\n  padding: 0;\n  margin-bottom: 6px;\n  margin-left: 2px;\n  margin-right: 2px;\n  border-left: #ff5b5b 0.5vw solid;\n  border-right: #ff5b5b 0.5vw solid;\n  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);\n  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }\nmat-list-item:hover {\n  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);\n          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }\nh2 {\n  margin: 0;\n  color: #3b3e47;\n  padding: 0;\n  font-family: 'Share Tech', sans-serif;\n  font-size: 2.5vh; }\nmat-list {\n  margin: 0;\n  padding: 0; }\n", ""]);
 
 // exports
 
@@ -507,6 +581,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScoreBoardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -517,18 +592,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var ScoreBoardComponent = /** @class */ (function () {
-    function ScoreBoardComponent() {
+    function ScoreBoardComponent(socketService) {
+        this.players = [];
+        this.players = socketService.getDisplay.players;
     }
     ScoreBoardComponent.prototype.ngOnInit = function () {
     };
+    Object.defineProperty(ScoreBoardComponent.prototype, "getPlayers", {
+        get: function () {
+            return this.players;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ScoreBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-score-board',
             template: __webpack_require__("../../../../../src/app/core/score-board/score-board.component.html"),
             styles: [__webpack_require__("../../../../../src/app/core/score-board/score-board.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
     ], ScoreBoardComponent);
     return ScoreBoardComponent;
 }());
@@ -606,7 +691,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#global-navbar-root{\r\n  height: 10vh;\r\n\tposition: relative;\r\n\tpadding: 0;\r\n\tmargin: 0;\r\n  -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);\r\n          box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);\r\n\r\n}\r\n#global-navbar-strip{\r\n\theight: 10vh;\r\n\twidth: 100vw;\r\n\tpadding: 0;\r\n  background: #ff5b5b;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%)\r\n}\r\n\r\n", ""]);
+exports.push([module.i, "#global-navbar-root{\r\n  height: 10vh;\r\n\tposition: relative;\r\n\tpadding: 0;\r\n\tmargin: 0;\r\n  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n}\r\n\r\n#global-navbar-root:hover {\r\n  -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 19px 18px rgba(0,0,0,0.22);\r\n          box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 19px 18px rgba(0,0,0,0.22);\r\n}\r\n\r\n#global-navbar-strip{\r\n\theight: 10vh;\r\n\twidth: 100vw;\r\n\tpadding: 0;\r\n  background: #ff5b5b;\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -50%);\r\n          transform: translate(-50%, -50%)\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -702,13 +787,69 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
 
 var SocketIoService = /** @class */ (function () {
     function SocketIoService() {
         this.SERVER_URL = 'http://localhost:8080';
+        this.players = [];
+        this.submissions = [];
     }
+    Object.defineProperty(SocketIoService.prototype, "getDisplay", {
+        get: function () {
+            return this.display;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SocketIoService.prototype, "socketId", {
+        get: function () {
+            return this.socket.id;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    SocketIoService.prototype.createFakeDisplay = function (playerCount) {
+        for (var count = 0; count < playerCount; count++) {
+            this.players[count] = {
+                playerName: 'player #' + Math.round(count * 10 * Math.random()),
+                playerId: 'player' + count,
+                hand: this.generateFakeHand(),
+                isJudge: false,
+                score: Math.round(count * 3 * Math.random())
+            };
+            this.submissions[count] = {
+                cardId: Math.round(count * 10 * Math.random()),
+                body: 'This is a body of the white card, randomly generated ' + count,
+                owner: 'player' + count
+            };
+        }
+        this.display = {
+            blackCard: {
+                cardId: 122,
+                body: 'This is a body of the black card, randomly generated',
+                owner: 'Stellar, he\'s always judge',
+            },
+            currentJudge: 'Stellar, she\'s always judge',
+            submissions: this.submissions,
+            players: this.players
+        };
+    };
+    SocketIoService.prototype.generateFakeHand = function () {
+        var array = [];
+        for (var count = 0; count < 7; count++) {
+            array[count] = {
+                cardId: Math.round(99 * Math.random()),
+                body: 'This is a body of the white card, randomly generated ' + count,
+                owner: 'player' + count
+            };
+        }
+        return array;
+    };
     SocketIoService.prototype.initSocket = function () {
         this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL, { query: 'name=' + this.playerName });
         this.socket.emit('userJoined');
@@ -731,7 +872,8 @@ var SocketIoService = /** @class */ (function () {
         });
     };
     SocketIoService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [])
     ], SocketIoService);
     return SocketIoService;
 }());
@@ -748,7 +890,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "  @import url('https://fonts.googleapis.com/css?family=Fascinate');\r\n\r\n#enter:hover, #about:hover, h1:hover{\r\n  background-color: white;\r\n  color: #ff7f60;\r\n  cursor: pointer;\r\n}\r\n\r\n#enter:hover, #about:hover{\r\n  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n}\r\n\r\n#about, #enter{\r\n  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n          box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n  -webkit-transition: all 0.2s cubic-bezier(.25,.8,.25,1);\r\n  transition: all 0.2s cubic-bezier(.25,.8,.25,1);\r\n}\r\n\r\n#enter{\r\n  margin: 0 0 0 2vw;\r\n  float: left;\r\n  width: 15vw;\r\n  padding-right: 7vw;\r\n\r\n}\r\n\r\n#about{\r\n  float: right;\r\n  width: 15vw;\r\n  margin: 0 2vw 0 0;\r\n  padding-right: 7vw;\r\n}\r\n\r\nh1 {\r\n  margin: 0;\r\n  padding: 1vw 4vw;\r\n  height: 6vw;\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', serif;\r\n  horiz-align: center;\r\n  font-size: 5vw;\r\n  width: 14vw;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n\r\n.overlay {\r\n  width: 55vw;\r\n  position: absolute;\r\n  top: 100%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -110%);\r\n          transform: translate(-50%, -110%);\r\n}\r\n", ""]);
+exports.push([module.i, "  @import url('https://fonts.googleapis.com/css?family=Fascinate');\r\n\r\n#enter:hover, #about:hover, h1:hover{\r\n  background-color: white;\r\n  color: #ff5b5b;\r\n  cursor: pointer;\r\n}\r\n\r\n#enter:hover, #about:hover{\r\n  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);\r\n}\r\n\r\n#about, #enter{\r\n  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n          box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n  -webkit-transition: all 0.2s cubic-bezier(.25,.8,.25,1);\r\n  transition: all 0.2s cubic-bezier(.25,.8,.25,1);\r\n}\r\n\r\n#enter{\r\n  margin: 0 0 0 2vw;\r\n  float: left;\r\n  width: 15vw;\r\n  padding-right: 7vw;\r\n\r\n}\r\n\r\n#about{\r\n  float: right;\r\n  width: 15vw;\r\n  margin: 0 2vw 0 0;\r\n  padding-right: 7vw;\r\n}\r\n\r\nh1 {\r\n  margin: 0;\r\n  padding: 1vw 4vw;\r\n  height: 6vw;\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', serif;\r\n  horiz-align: center;\r\n  font-size: 5vw;\r\n  width: 14vw;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n\r\n.overlay {\r\n  width: 55vw;\r\n  position: absolute;\r\n  top: 100%;\r\n  left: 50%;\r\n  margin: 0 0 0 0;\r\n  -webkit-transform: translate(-50%, -110%);\r\n          transform: translate(-50%, -110%);\r\n}\r\n", ""]);
 
 // exports
 
@@ -761,7 +903,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/splash/splash-navigate/splash-navigate.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"overlay\" (click)=\"toCore()\" [@splashButtonsAnimationState] = 'getState'>\n  <div id=\"enter\">\n    <h1>Enter</h1>\n  </div>\n  <div id=\"about\">\n    <h1>About</h1>\n  </div>\n</div>\n"
+module.exports = "<div class=\"overlay\" [@splashButtonsAnimationState] = 'getState'>\r\n  <div id=\"enter\" (click)=\"toCore()\">\r\n    <h1>Enter</h1>\r\n  </div>\r\n  <div id=\"about\" (click)=\"toAbout()\">\r\n    <h1>About</h1>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -806,6 +948,10 @@ var SplashNavigateComponent = /** @class */ (function () {
     SplashNavigateComponent.prototype.toCore = function () {
         this.animate(this.route);
     };
+    // TODO
+    SplashNavigateComponent.prototype.toAbout = function () {
+        this.animate(this.route);
+    };
     SplashNavigateComponent.prototype.ngOnInit = function () {
     };
     Object.defineProperty(SplashNavigateComponent.prototype, "getState", {
@@ -835,7 +981,7 @@ var SplashNavigateComponent = /** @class */ (function () {
                     Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["h" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["i" /* style */])({
                         transform: 'translateX(-200%) translateY(-100%)'
                     })),
-                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["j" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["e" /* animate */])('600ms ease-in'))
+                    Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["j" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_2__angular_animations__["e" /* animate */])('500ms ease-in'))
                 ])
             ]
         }),
@@ -920,7 +1066,7 @@ var SplashComponent = /** @class */ (function () {
                     Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* state */])('end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* style */])({
                         transform: 'translateX(100%) translateY(-50%)'
                     })),
-                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["j" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('600ms ease-in'))
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["j" /* transition */])('start => end', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('500ms ease-in'))
                 ])
             ]
         }),

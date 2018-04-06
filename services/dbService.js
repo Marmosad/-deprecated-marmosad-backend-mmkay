@@ -1,5 +1,5 @@
+var instance;
 module.exports = function () {
-    var instance;
     if(!instance){
         instance = {
             start: function () {
