@@ -1,4 +1,4 @@
-var instance;
+//var instance;
 var board = require('../services/board.js')();
 
 var userHandler = require('./userHandler.js')();
@@ -9,12 +9,15 @@ module.exports = function () {
 
     console.log('socketService Started');
     io.on('connection', function (socket) {
-        var playerName = socket.handshake.query.name;
-        userHandler.joined(playerName, socket, socket.id);
+        userHandler.joined(socket.handshake.query.name, socket, socket.id);//this is called to first create, then add player to board.
 
         socket.on('sendMsg', function (data) {
             console.log(data);
             chatHandler.onMessage(data.msg, data.from);
+        });
+
+        socket.on('printDisplay', function (data) {
+            console.log(board.display);
         });
 
         socket.on('disconnect', function (reason) {
@@ -22,22 +25,21 @@ module.exports = function () {
             userHandler.removeUser(socket.id);
         });
 
-        socket.on('startGame', function(){
+        socket.on('startGame', function () {
             board.startGame();
         });
 
         socket.on('submission', function (card) {
             var submission = Json.parse(card);
-            board.phase1(submission);
+            board.submission(submission);
         });
 
         socket.on('testAll', function (card) {
             board.startGame();
-            board.phase1(card);
-            board.phase3(card);
-            console.log(board.players);
+            board.submission(card);
+            //board.phase3(card);
+            console.log(board.display);
         });
 
     });
 };
-
