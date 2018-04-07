@@ -1,4 +1,4 @@
-var instance;
+//var instance;
 var board = require('../services/board.js')();
 
 var userHandler = require('./userHandler.js')();
@@ -9,47 +9,40 @@ module.exports = function () {
 
     console.log('socketService Started');
     io.on('connection', function (socket) {
-        var playerName = socket.handshake.query.name;
-        userHandler.joined(playerName, socket, socket.id);
-
+        userHandler.joined(socket.handshake.query.name, socket, socket.id);//this is called to first create, then add player to board.
+        socket.emit('updateDisplay', board.getDisplay());
         socket.on('sendMsg', function (data) {
             console.log(data);
             chatHandler.onMessage(data.msg, data.from);
         });
+
+        socket.on('printDisplay', function (data) {
+            console.log(board.display);
+        });
+
         socket.on('disconnect', function (reason) {
             console.log(socket.id + ' ' + reason);
             userHandler.removeUser(socket.id);
         });
-        socket.on('startGame', function(){
-            var firstRound = board.startGame();
-            console.log(firstRound);
-            io.emit('startGame', firstRound);
-        });
-        socket.on('submission', function (card) {
-            console.log(card);
-            board.phase1(card);
-        });
-        socket.on('winner', function (card) {
-            console.log(card);
-            board.phase3(card);
-        });
-        /*
+
         socket.on('startGame', function () {
-
-            socket.emit('gameStatus', 'Starting Game');
-            GameHandler.startGame();
+            board.startGame();
         });
 
-        socket.on('submitCard', function (whiteCard) {
-            console.log(currentUser.id + ': ' + whiteCard);
-            GameHandler.startGame();
-            var currentUser = {
-                id: socket.id,
-                name: name
-            };
-            socket.emit('gameStatus', currentUser.name + ' submitted their entry');
+        socket.on('submission', function (card) {
+            board.submission(JSON.parse(card));
         });
-        */
+
+        socket.on('judgment', function (card) {
+            board.submission(JSON.parse(card));
+        });
+
+        socket.on('testAll', function (card) {
+            board.startGame();
+            board.submission(card);
+            //board.phase3(card);
+            console.log(board.display);
+        });
+
     });
 };
-
