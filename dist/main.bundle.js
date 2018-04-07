@@ -141,12 +141,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__core_score_board_score_board_component__ = __webpack_require__("../../../../../src/app/core/score-board/score-board.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__core_board_core_board_core_component__ = __webpack_require__("../../../../../src/app/core/board-core/board-core.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__core_game_board_game_board_component__ = __webpack_require__("../../../../../src/app/core/game-board/game-board.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__core_display_service_display_service_service__ = __webpack_require__("../../../../../src/app/core/display-service/display-service.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -196,7 +198,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_flex_layout__["a" /* FlexLayoutModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_14__socket_io_socket_io_service__["a" /* SocketIoService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_14__socket_io_socket_io_service__["a" /* SocketIoService */], __WEBPACK_IMPORTED_MODULE_19__core_display_service_display_service_service__["a" /* DisplayService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -254,29 +256,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var BoardCoreComponent = /** @class */ (function () {
     function BoardCoreComponent(socketService) {
-        var _this = this;
         this.socketService = socketService;
         this.showName = true;
         this.hasName = false;
         this.showBoard = false;
-        this.setPlayerName = function (playerName) {
-            _this.toggleName();
-            setTimeout(function () {
-                _this.playerName = playerName;
-                _this.hasName = true;
-                _this.socketService.setPlayerName(playerName);
-                setTimeout(function () {
-                    _this.toggleBoard();
-                }, 10);
-            }, 300);
-        };
-        socketService.createFakeDisplay(4);
     }
     BoardCoreComponent.prototype.ngOnInit = function () {
         var _this = this;
         setTimeout(function () {
             _this.toggleName();
         }, 1);
+    };
+    BoardCoreComponent.prototype.setPlayerName = function (playerName) {
+        var _this = this;
+        this.toggleName();
+        setTimeout(function () {
+            _this.playerName = playerName;
+            _this.hasName = true;
+            _this.socketService.setPlayerName(playerName);
+            _this.socketService.initSocket();
+            setTimeout(function () {
+                _this.toggleBoard();
+            }, 10);
+        }, 300);
     };
     Object.defineProperty(BoardCoreComponent.prototype, "getNameState", {
         get: function () {
@@ -389,15 +391,13 @@ var ChatComponent = /** @class */ (function () {
             message = '';
         };
         this.socketStart();
+        this.socketService.onMessage().subscribe(function (message) {
+            _this.messages.push(message.from + ': ' + message.msg);
+        });
     }
     ChatComponent.prototype.ngOnInit = function () {
     };
     ChatComponent.prototype.socketStart = function () {
-        var _this = this;
-        this.socketService.initSocket();
-        this.ioConnection = this.socketService.onMessage().subscribe(function (message) {
-            _this.messages.push(message.from + ': ' + message.msg);
-        });
     };
     ChatComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -475,6 +475,94 @@ var CoreComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/core/display-service/display-service.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DisplayService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__ = __webpack_require__("../../../../rxjs/_esm5/Subject.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DisplayService = /** @class */ (function () {
+    function DisplayService(socketService) {
+        var _this = this;
+        this.scoreSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
+        this.handSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
+        this.submissionsSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
+        this.blackCardSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
+        socketService.onDisplayUpdate().subscribe(function (display) {
+            _this.display = display;
+            _this.scoreSubject.next(display.players);
+            _this.handSubject.next(_this.getHand(display.players, socketService.socketId));
+            _this.submissionsSubject.next(display.submissions);
+            _this.blackCardSubject.next(display.blackCard);
+            console.log('display service got an update');
+            console.log(display);
+        });
+    }
+    DisplayService.prototype.getHand = function (players, id) {
+        return players[players.findIndex(function (elem) {
+            return (elem.playerId === id);
+        })].hand;
+    };
+    Object.defineProperty(DisplayService.prototype, "getScoreSubject", {
+        get: function () {
+            return this.scoreSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DisplayService.prototype, "getHandSubject", {
+        get: function () {
+            return this.handSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DisplayService.prototype, "getSubmissionsSubject", {
+        get: function () {
+            return this.submissionsSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DisplayService.prototype, "getBlackCardSubject", {
+        get: function () {
+            return this.blackCardSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DisplayService.prototype, "getDisplay", {
+        get: function () {
+            return this.display;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DisplayService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
+    ], DisplayService);
+    return DisplayService;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/core/game-board/game-board.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -483,7 +571,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".game-board-card {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n}\r\n\r\n.card {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);\r\n          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n  border-bottom: #ff5b5b 0.5vw solid;\r\n}\r\n\r\n.card:hover {\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n}\r\n\r\n.submissions {\r\n}\r\n\r\n.hand {\r\n  padding: 1vh 0 2vh 0;\r\n}\r\n\r\n.controls {\r\n  padding-bottom: 10px;\r\n}\r\n\r\nbutton{\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n}\r\n\r\nbutton:hover{\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n  background-color: white;\r\n  color: #ff5b5b;\r\n  cursor: pointer;\r\n}\r\n", ""]);
+exports.push([module.i, ".game-board-card {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n}\r\n\r\n.card {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);\r\n          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n\r\n}\r\n\r\n.card:hover {\r\n  border-bottom: #ff5b5b 0.5vw solid;\r\n  border-top: #ff5b5b 0vw solid;\r\n  /* box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22); */\r\n}\r\n\r\n.submissions {\r\n}\r\n\r\n.hand {\r\n  padding: 1vh 0 2vh 0;\r\n}\r\n\r\n.controls {\r\n  padding-bottom: 10px;\r\n}\r\n\r\nbutton{\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n}\r\n\r\nbutton:hover{\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n  background-color: white;\r\n  color: #ff5b5b;\r\n  cursor: pointer;\r\n}\r\n", ""]);
 
 // exports
 
@@ -506,7 +594,6 @@ module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameBoardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -517,31 +604,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var GameBoardComponent = /** @class */ (function () {
-    function GameBoardComponent(socketService) {
-        this.display = socketService.getDisplay;
-        this.hand = this.display.players[0].hand;
-        // this.hand = this.display.players[this.display.players.find((elem) => {
-        //   return (elem.playerId === socketService.socketId);
-        // })].hand;
+    function GameBoardComponent() {
     }
     GameBoardComponent.prototype.ngOnInit = function () {
     };
-    Object.defineProperty(GameBoardComponent.prototype, "getDisplay", {
-        get: function () {
-            return this.display;
-        },
-        enumerable: true,
-        configurable: true
-    });
     GameBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-game-board',
             template: __webpack_require__("../../../../../src/app/core/game-board/game-board.component.html"),
             styles: [__webpack_require__("../../../../../src/app/core/game-board/game-board.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
+        __metadata("design:paramtypes", [])
     ], GameBoardComponent);
     return GameBoardComponent;
 }());
@@ -553,7 +627,7 @@ var GameBoardComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/core/score-board/score-board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"score-card\" fxFlex  fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n  <div class=\"score-top\" fxFlex=\"10\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n  <div class=\"scores\" fxFlex=\"90\" fxLayoutAlign=\"start stretch\" fxLayout=\"column\">\r\n    <mat-list fxLayoutAlign=\"start stretch\" fxLayout=\"column\" >\r\n      <mat-list-item *ngFor=\"let player of getPlayers\" fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"40px\">\r\n        <div class=\"score-row\" fxFlex fxLayout=\"row\" fxLayoutAlign=\"space-between stretch\">\r\n          <h2 fxFlex=\"60\">{{player.playerName}}</h2> <h2 fxFlex=\"30\">: </h2> <h2 fxFlex=\"10\">{{player.score}}</h2>\r\n        </div>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </div>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"score-card\" fxFlex  fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n  <div class=\"score-top\" fxFlex=\"10\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n  <div class=\"scores\" fxFlex=\"90\" fxLayoutAlign=\"start stretch\" fxLayout=\"column\">\r\n    <mat-list fxLayoutAlign=\"start stretch\" fxLayout=\"column\" >\r\n      <mat-list-item *ngFor=\"let player of players\" fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"40px\">\r\n        <div class=\"score-row\" fxFlex fxLayout=\"row\" fxLayoutAlign=\"space-between stretch\">\r\n          <h2 fxFlex=\"60\">{{player.playerName}}</h2> <h2 fxFlex=\"30\">: </h2> <h2 fxFlex=\"10\">{{player.score}}</h2>\r\n        </div>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -581,7 +655,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScoreBoardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__display_service_display_service_service__ = __webpack_require__("../../../../../src/app/core/display-service/display-service.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -594,26 +668,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ScoreBoardComponent = /** @class */ (function () {
-    function ScoreBoardComponent(socketService) {
+    function ScoreBoardComponent(displayService) {
+        var _this = this;
         this.players = [];
-        this.players = socketService.getDisplay.players;
+        displayService.getScoreSubject.subscribe(function (players) {
+            _this.players = players;
+        });
     }
     ScoreBoardComponent.prototype.ngOnInit = function () {
     };
-    Object.defineProperty(ScoreBoardComponent.prototype, "getPlayers", {
-        get: function () {
-            return this.players;
-        },
-        enumerable: true,
-        configurable: true
-    });
     ScoreBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-score-board',
             template: __webpack_require__("../../../../../src/app/core/score-board/score-board.component.html"),
             styles: [__webpack_require__("../../../../../src/app/core/score-board/score-board.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__display_service_display_service_service__["a" /* DisplayService */]])
     ], ScoreBoardComponent);
     return ScoreBoardComponent;
 }());
@@ -832,7 +902,6 @@ var SocketIoService = /** @class */ (function () {
             blackCard: {
                 cardId: 122,
                 body: 'This is a body of the black card, randomly generated',
-                owner: 'Stellar, he\'s always judge',
             },
             currentJudge: 'Stellar, she\'s always judge',
             submissions: this.submissions,
@@ -867,6 +936,15 @@ var SocketIoService = /** @class */ (function () {
         var _this = this;
         return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
             _this.socket.on('message', function (data) {
+                observer.next(data);
+            });
+        });
+    };
+    SocketIoService.prototype.onDisplayUpdate = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.socket.on('updateDisplay', function (data) {
+                console.log('Socket got an update for display');
                 observer.next(data);
             });
         });
@@ -939,7 +1017,7 @@ var SplashNavigateComponent = /** @class */ (function () {
             _this.toggle();
             setTimeout(function () {
                 callRoute();
-            }, 600);
+            }, 500);
         };
         this.route = function () {
             _this.router.navigate(['/core']);

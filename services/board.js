@@ -27,9 +27,14 @@ module.exports = function () {
                 "players": []
             },
 
+            getDisplay: function () {
+                return this.display;
+            },
+
             joinPlayer: function (player, playerId) {
                 this.players[playerId] = player;
                 this.display.players.push(player.data);
+                this.updateCurrentDisplay();
             },
 
             instanceNumber: Math.random(),
@@ -44,6 +49,8 @@ module.exports = function () {
                 delete this.players[playerId].data;
                 delete this.players[playerId];
                 console.log(Object.keys(this.players).length + ' is left in the game');
+                this.updatePlayersInDisplay();
+                this.updateCurrentDisplay();
             },
 
             startGame: function () {
@@ -140,7 +147,7 @@ module.exports = function () {
             },
 
             updateCurrentDisplay: function () {
-                io.emit('display', stringify(this.display, null, 0));
+                io.emit('updateDisplay', this.getDisplay());
             }, //Decided to implement this as a function in the end cuz prior approach would only update display at user join time.
 
             findPlayerInDisplay: function (playerId) {
@@ -154,7 +161,6 @@ module.exports = function () {
                 console.log(this.players[winnerID].name + ' won!')
                 // Not sure what to do here yet.
             }
-
         };
     }
     return instance;

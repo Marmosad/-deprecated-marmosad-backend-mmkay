@@ -10,7 +10,7 @@ module.exports = function () {
     console.log('socketService Started');
     io.on('connection', function (socket) {
         userHandler.joined(socket.handshake.query.name, socket, socket.id);//this is called to first create, then add player to board.
-
+        socket.emit('updateDisplay', board.getDisplay());
         socket.on('sendMsg', function (data) {
             console.log(data);
             chatHandler.onMessage(data.msg, data.from);
@@ -30,8 +30,11 @@ module.exports = function () {
         });
 
         socket.on('submission', function (card) {
-            var submission = Json.parse(card);
-            board.submission(submission);
+            board.submission(JSON.parse(card));
+        });
+
+        socket.on('judgment', function (card) {
+            board.submission(JSON.parse(card));
         });
 
         socket.on('testAll', function (card) {
