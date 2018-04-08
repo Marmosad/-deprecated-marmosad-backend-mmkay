@@ -673,6 +673,7 @@ var ScoreBoardComponent = /** @class */ (function () {
         this.players = [];
         displayService.getScoreSubject.subscribe(function (players) {
             _this.players = players;
+            console.log(players);
         });
     }
     ScoreBoardComponent.prototype.ngOnInit = function () {
@@ -920,7 +921,7 @@ var SocketIoService = /** @class */ (function () {
         return array;
     };
     SocketIoService.prototype.initSocket = function () {
-        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL, { query: 'name=' + this.playerName });
+        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__({ query: 'name=' + this.playerName });
         this.socket.emit('userJoined');
     };
     SocketIoService.prototype.send = function (message) {
