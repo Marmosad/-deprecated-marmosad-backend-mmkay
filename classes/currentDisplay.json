@@ -1,0 +1,7 @@
+{
+  "blackCard": 4, //This should be a black card object
+  "submissions": [
+    // This is a list of n white card objects
+  ],
+  "currentJudge": 44 // The player ID of the person who is the judge
+}

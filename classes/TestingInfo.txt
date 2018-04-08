@@ -1,0 +1,32 @@
+Sample Player Object with Hand.
+
+Player with name: undefined and id: 5frs-mj337KakHXzAAAB joined
+{ '222':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' },
+  '223':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' },
+  '224':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' },
+  '225':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' },
+  '226':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' },
+  '227':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' },
+  '228':
+   { cardID: 222,
+     body: 'This is the contents of the card',
+     owner: '5frs-mj337KakHXzAAAB' } }
+
