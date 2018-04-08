@@ -266,9 +266,20 @@ var BoardCoreComponent = /** @class */ (function () {
         setTimeout(function () {
             _this.toggleName();
         }, 1);
+        if (this.socketService.hasSocket) {
+            this.hasName = true;
+            this.socketService.initSocket();
+            setTimeout(function () {
+                _this.toggleBoard();
+            }, 10);
+        }
+    };
+    BoardCoreComponent.prototype.ngOnDestroy = function () {
+        this.socketService.closeSocket();
     };
     BoardCoreComponent.prototype.setPlayerName = function (playerName) {
         var _this = this;
+        console.log('setPlayerName');
         this.toggleName();
         setTimeout(function () {
             _this.playerName = playerName;
@@ -498,14 +509,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DisplayService = /** @class */ (function () {
     function DisplayService(socketService) {
         var _this = this;
+        this.socketService = socketService;
         this.scoreSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
         this.handSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
         this.submissionsSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
         this.blackCardSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
-        socketService.onDisplayUpdate().subscribe(function (display) {
+        this.socketService.onDisplayUpdate().subscribe(function (display) {
             _this.display = display;
             _this.scoreSubject.next(display.players);
-            _this.handSubject.next(_this.getHand(display.players, socketService.socketId));
+            _this.handSubject.next(_this.getHand(display.players, _this.socketService.socketId));
             _this.submissionsSubject.next(display.submissions);
             _this.blackCardSubject.next(display.blackCard);
             console.log('display service got an update');
@@ -669,14 +681,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ScoreBoardComponent = /** @class */ (function () {
     function ScoreBoardComponent(displayService) {
-        var _this = this;
+        this.displayService = displayService;
         this.players = [];
-        displayService.getScoreSubject.subscribe(function (players) {
+    }
+    ScoreBoardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.displayService.getScoreSubject.subscribe(function (players) {
             _this.players = players;
             console.log(players);
         });
-    }
-    ScoreBoardComponent.prototype.ngOnInit = function () {
+    };
+    ScoreBoardComponent.prototype.ngOnDestroy = function () {
     };
     ScoreBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -921,9 +936,24 @@ var SocketIoService = /** @class */ (function () {
         return array;
     };
     SocketIoService.prototype.initSocket = function () {
-        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__({ query: 'name=' + this.playerName });
+        // this.socket = SocketIo({ query: 'name=' + this.playerName });
+        if (this.socket === undefined) {
+            this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL, { query: 'name=' + this.playerName });
+        }
+        else {
+            this.socket.connect();
+        }
+
         this.socket.emit('userJoined');
+        console.log('init ran ' + this.socket);
     };
+    Object.defineProperty(SocketIoService.prototype, "hasSocket", {
+        get: function () {
+            return !(this.socket === undefined);
+        },
+        enumerable: true,
+        configurable: true
+    });
     SocketIoService.prototype.send = function (message) {
         this.socket.emit('sendMsg', message);
     };
@@ -949,6 +979,9 @@ var SocketIoService = /** @class */ (function () {
                 observer.next(data);
             });
         });
+    };
+    SocketIoService.prototype.closeSocket = function () {
+        return this.socket.disconnect();
     };
     SocketIoService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
