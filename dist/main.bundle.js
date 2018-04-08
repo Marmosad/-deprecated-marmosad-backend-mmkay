@@ -943,6 +943,7 @@ var SocketIoService = /** @class */ (function () {
         else {
             this.socket.connect();
         }
+
         this.socket.emit('userJoined');
         console.log('init ran ' + this.socket);
     };
