@@ -142,8 +142,10 @@ module.exports = function () {
             updatePlayersInDisplay: function () {
                 this.display.players = [];
                 for (var i = 0; i < Object.keys(this.players).length; i++) {
-                    this.display.players.push(Object.keys(this.players)[i].data);
+                    this.display.players.push(this.players[Object.keys(this.players)[i]].data);
+                    console.log(this.players[Object.keys(this.players)[i]].data);
                 }
+                console.log(this.display.players);
             },
 
             updateCurrentDisplay: function () {
