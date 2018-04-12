@@ -10,7 +10,7 @@ module.exports = function () {
     console.log('socketService Started');
     io.on('connection', function (socket) {
         userHandler.joined(socket.handshake.query.name, socket, socket.id);//this is called to first create, then add player to board.
-        socket.emit('updateDisplay', board.getDisplay());
+        io.emit('updateDisplay', board.getDisplay());
         socket.on('sendMsg', function (data) {
             console.log(data);
             chatHandler.onMessage(data.msg, data.from);
@@ -26,15 +26,17 @@ module.exports = function () {
         });
 
         socket.on('startGame', function () {
+            console.log('startGame Socket event');
             board.startGame();
         });
 
         socket.on('submission', function (card) {
-            board.submission(JSON.parse(card));
+            console.log(card + "submitted");
+            board.submission(card);
         });
 
         socket.on('judgment', function (card) {
-            board.submission(JSON.parse(card));
+            board.judgement(JSON.parse(card)); // TODO why does this count as a submission
         });
 
         socket.on('testAll', function (card) {
