@@ -57,26 +57,32 @@ module.exports = function () {
                 this.display.blackCard = jsonHandler.createBlackCard();
                 this.players[Object.keys(this.players)[0]].data.isJudge = true;
                 this.display.currentJudge = this.players[Object.keys(this.players)[0]].data.playerId;
-                this.display.players[this.findPlayerInDisplay(this.display.currentJudge)] = true;
                 console.log(Object.keys(this.players)[0] + ' is the first judge'); // Should be io.emit
                 this.phase = this.Phases.submission;
+                this.updatePlayersInDisplay();
+                this.updateCurrentDisplay();
+                console.log('startGame :');
+                console.log(this.display);
             },
 
             submission: function (whiteCard) {
-                if (this.phase === this.Phases.submission) {
+                if (this.phase !== this.Phases.submission) {
                     return false;
                 }
-                var displayIndex = this.findPlayerInDisplay(whiteCard.owner);
+                console.log('attempting to find id ' + whiteCard.owner + ' of \n' + this.players[whiteCard.owner]);
                 var playerLocation = this.players[whiteCard.owner].data.hand.findIndex(function (element) {
                     return (whiteCard.cardId === element.cardId)
                 });
-                delete this.players[whiteCard.owner].data.hand[playerLocation];
-                this.display.players[displayIndex] = this.players[whiteCard.owner].data;
+                console.log(playerLocation);
+                // NOTE!!!! Splice splices out an array, even if its size 0
+                this.display.submissions.push(this.players[whiteCard.owner].data.hand.splice(playerLocation, 1)[0]);
+                this.updatePlayersInDisplay();
+                this.updateCurrentDisplay();
                 console.log(this.display.submissions.length);
                 console.log(Object.keys(this.players).length - 1);
-                this.updateCurrentDisplay();
                 if (this.display.submissions.length >= Object.keys(this.players).length - 1) {
                     this.phase = this.Phases.judgement;
+                    console.log('this.display.submissions.length >= Object.keys(this.players).length - 1');
                 }
                 return true; //error handling maybe? Can't hurt
             },
