@@ -32,11 +32,11 @@ module.exports = function () {
 
         socket.on('submission', function (card) {
             console.log(card + "submitted");
-            board.submission(card);
+            console.log(board.submission(card));
         });
 
         socket.on('judgment', function (card) {
-            board.judgement(JSON.parse(card)); // TODO why does this count as a submission
+            board.judgement(card); // TODO why does this count as a submission
         });
 
         socket.on('testAll', function (card) {
