@@ -520,6 +520,7 @@ var DisplayService = /** @class */ (function () {
             _this.handSubject.next(_this.getHand(display.players, _this.socketService.socketId));
             _this.submissionsSubject.next(display.submissions);
             _this.blackCardSubject.next(display.blackCard);
+            _this.isJudge = (_this.socketService.getSocketId() === _this.display.currentJudge);
             console.log('display service got an update');
             console.log(display);
         });
@@ -564,6 +565,13 @@ var DisplayService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DisplayService.prototype, "getIsJudge", {
+        get: function () {
+            return this.isJudge;
+        },
+        enumerable: true,
+        configurable: true
+    });
     DisplayService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__socket_io_socket_io_service__["a" /* SocketIoService */]])
@@ -596,7 +604,8 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/game-board/game-board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"2vh\">\r\n  <div class=\"game-board-top\"fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"submissions\">\r\n    <mat-card class=\"blackCard\" fxFlex draggable=\"true\" >\r\n      <p class=\"blackCardText\">{{blackCard.body}}</p>\r\n      <h3 class=\"blackCardId\">{{blackCard.cardId}}</h3>\r\n    </mat-card>\r\n    <mat-card class=\"whiteCard\" *ngFor=\"let card of submissions\" fxFlex>\r\n      <p>{{card.body}} 11</p>\r\n      <h3>{{card.cardId}}</h3>\r\n    </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button (click)=\"startGame()\" mat-raised-button fxFlex>Start Game</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"whiteCard\" *ngFor=\"let card of hand\" fxFlex draggable=\"true\" (click)=\"submitCard(card)\">\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n</mat-card>\r\n"
+
+module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"2vh\">\r\n  <div class=\"game-board-top\"fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"submissions\">\r\n    <mat-card class=\"blackCard\" fxFlex draggable=\"true\" >\r\n      <p class=\"blackCardText\">{{blackCard.body}}</p>\r\n      <h3 class=\"blackCardId\">{{blackCard.cardId}}</h3>\r\n    </mat-card>\r\n    <mat-card class=\"whiteCard\" *ngFor=\"let card of submissions\" fxFlex (click)=\"submitJudgement(card)\">\r\n      <p>{{card.body}}</p>\r\n      <h3>{{card.cardId}}</h3>\r\n    </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button (click)=\"startGame()\" mat-raised-button fxFlex>Start Game</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"whiteCard\" *ngFor=\"let card of hand\" fxFlex draggable=\"true\" (click)=\"submitCard(card)\">\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -643,7 +652,14 @@ var GameBoardComponent = /** @class */ (function () {
         this.socketIoService.startGame();
     };
     GameBoardComponent.prototype.submitCard = function (card) {
-        this.socketIoService.submitCard(card);
+        if (!this.displayService.getIsJudge) {
+            this.socketIoService.submitCard(card);
+        }
+    };
+    GameBoardComponent.prototype.submitJudgement = function (card) {
+        if (this.displayService.getIsJudge) {
+            this.socketIoService.submitJudgement(card);
+        }
     };
     GameBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -663,7 +679,7 @@ var GameBoardComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/core/score-board/score-board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"score-card\" fxFlex  fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n  <div class=\"score-top\" fxFlex=\"10\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n  <div class=\"scores\" fxFlex=\"90\" fxLayoutAlign=\"start stretch\" fxLayout=\"column\">\r\n    <mat-list fxLayoutAlign=\"start stretch\" fxLayout=\"column\" >\r\n      <mat-list-item *ngFor=\"let player of players\" fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"40px\">\r\n        <div class=\"score-row\" fxFlex fxLayout=\"row\" fxLayoutAlign=\"space-between stretch\">\r\n          <h2 fxFlex=\"60\">{{player.playerName}}</h2> <h2 fxFlex=\"30\">: </h2> <h2 fxFlex=\"10\">{{player.score}}</h2>\r\n        </div>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </div>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"score-card\" fxFlex  fxLayout=\"column\" fxFill fxLayoutAlign=\"start stretch\">\r\n  <div class=\"score-top\" fxFlex=\"10\">\r\n    <h1>Score Board</h1>\r\n  </div>\r\n  <div class=\"scores\" fxFlex=\"90\" fxLayoutAlign=\"start stretch\" fxLayout=\"column\">\r\n    <mat-list fxLayoutAlign=\"start stretch\" fxLayout=\"column\" >\r\n      <mat-list-item *ngFor=\"let player of players\" fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"40px\">\r\n        <div class=\"score-row\" fxFlex fxLayout=\"row\" fxLayoutAlign=\"start stretch\">\r\n          <h2 fxFlex=\"40\">{{player.playerName}}</h2> <h2 fxFlex=\"5\">: </h2> <h2 fxFlex=\"10\">{{player.score}}</h2>\r\n          <h2 fxFlex=\"45\" *ngIf=\"player.isJudge\">  - is judge</h2>\r\n        </div>\r\n      </mat-list-item>\r\n    </mat-list>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -1011,6 +1027,10 @@ var SocketIoService = /** @class */ (function () {
     };
     SocketIoService.prototype.submitCard = function (card) {
         this.socket.emit('submission', card);
+    };
+    SocketIoService.prototype.submitJudgement = function (card) {
+        this.socket.emit('judgment', card);
+        console.log('judged');
     };
     SocketIoService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
