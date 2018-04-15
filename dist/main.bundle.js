@@ -604,8 +604,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/game-board/game-board.component.html":
 /***/ (function(module, exports) {
 
-
-module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"2vh\">\r\n  <div class=\"game-board-top\"fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"submissions\">\r\n    <mat-card class=\"blackCard\" fxFlex draggable=\"true\" >\r\n      <p class=\"blackCardText\">{{blackCard.body}}</p>\r\n      <h3 class=\"blackCardId\">{{blackCard.cardId}}</h3>\r\n    </mat-card>\r\n    <mat-card class=\"whiteCard\" *ngFor=\"let card of submissions\" fxFlex (click)=\"submitJudgement(card)\">\r\n      <p>{{card.body}}</p>\r\n      <h3>{{card.cardId}}</h3>\r\n    </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button (click)=\"startGame()\" mat-raised-button fxFlex>Start Game</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"whiteCard\" *ngFor=\"let card of hand\" fxFlex draggable=\"true\" (click)=\"submitCard(card)\">\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"2vh\">\r\n  <div class=\"game-board-top\"fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"submissions\">\r\n    <mat-card class=\"blackCard\" fxFlex (draggable)=\"true\" >\r\n      <p class=\"blackCardText\">{{blackCard.body}}</p>\r\n      <h3 class=\"blackCardId\">{{blackCard.cardId}}</h3>\r\n    </mat-card>\r\n    <mat-card class=\"whiteCard\" *ngFor=\"let card of submissions\" (draggable)=\"true\" fxFlex (click)=\"submitJudgement(card)\">\r\n      <p>{{card.body}}</p>\r\n      <h3>{{card.cardId}}</h3>\r\n    </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button (click)=\"startGame()\" mat-raised-button fxFlex>Start Game</button>\r\n    <button (click)=\"resetGame()\" mat-raised-button fxFlex>Reset Game</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"whiteCard\" *ngFor=\"let card of hand\" fxFlex (draggable)=\"true\" (click)=\"submitCard(card)\">\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -617,6 +616,9 @@ module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__display_service_display_service_service__ = __webpack_require__("../../../../../src/app/core/display-service/display-service.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__socket_io_socket_io_service__ = __webpack_require__("../../../../../src/app/socket-io/socket-io.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__ = __webpack_require__("../../../../rxjs/_esm5/observable/fromEvent.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__ = __webpack_require__("../../../../rxjs/_esm5/observable/interval.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -629,10 +631,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var GameBoardComponent = /** @class */ (function () {
     function GameBoardComponent(displayService, socketIoService) {
         this.displayService = displayService;
         this.socketIoService = socketIoService;
+        this.eventSource = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__["a" /* fromEvent */])(document, 'mousemove');
+        this.eventSource.pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["a" /* throttle */])(function (val) { return Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__["a" /* interval */])(20); })).subscribe(function (e) {
+            console.log(e.clientX);
+            console.log(e.clientY);
+        });
     }
     GameBoardComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -647,9 +657,15 @@ var GameBoardComponent = /** @class */ (function () {
         this.displayService.getSubmissionsSubject.subscribe(function (submissions) {
             _this.submissions = submissions;
         });
+        this.socketIoService.onReset().subscribe(function (data) {
+            window.location.reload();
+        });
     };
     GameBoardComponent.prototype.startGame = function () {
         this.socketIoService.startGame();
+    };
+    GameBoardComponent.prototype.resetGame = function () {
+        this.socketIoService.resetGame();
     };
     GameBoardComponent.prototype.submitCard = function (card) {
         if (!this.displayService.getIsJudge) {
@@ -921,7 +937,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var SocketIoService = /** @class */ (function () {
     function SocketIoService() {
-        this.SERVER_URL = 'http://localhost:8080';
+        this.SERVER_URL = 'http://localhost:8081';
         this.players = [];
         this.submissions = [];
     }
@@ -976,9 +992,9 @@ var SocketIoService = /** @class */ (function () {
         return array;
     };
     SocketIoService.prototype.initSocket = function () {
-        // this.socket = SocketIo({ query: 'name=' + this.playerName });
         if (this.socket === undefined) {
-            this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(this.SERVER_URL, { query: 'name=' + this.playerName });
+            this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__({ query: 'name=' + this.playerName });
+            // this.socket = SocketIo(this.SERVER_URL, { query: 'name=' + this.playerName });
         }
         else {
             this.socket.connect();
@@ -1019,11 +1035,22 @@ var SocketIoService = /** @class */ (function () {
             });
         });
     };
+    SocketIoService.prototype.onReset = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.socket.on('boardReset', function (data) {
+                observer.next(data);
+            });
+        });
+    };
     SocketIoService.prototype.closeSocket = function () {
         return this.socket.disconnect();
     };
     SocketIoService.prototype.startGame = function () {
         this.socket.emit('startGame', null);
+    };
+    SocketIoService.prototype.resetGame = function () {
+        this.socket.emit('reset', null);
     };
     SocketIoService.prototype.submitCard = function (card) {
         this.socket.emit('submission', card);
