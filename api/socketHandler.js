@@ -46,5 +46,15 @@ module.exports = function () {
             console.log(board.display);
         });
 
+        socket.on('reset', function () {
+            console.log('this happened');
+            io.emit('boardReset', null);
+            io.emit('message', {from: '', msg: ''});
+            var players = Object.keys(board.players);
+            for (var i in players) {
+                board.removePlayer(players[i]);
+            }
+            board.reset();
+        })
     });
 };
