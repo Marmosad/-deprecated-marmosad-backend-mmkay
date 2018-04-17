@@ -122,7 +122,7 @@ module.exports = function () {
                 //console.log(keys);
                 for (key in keys) {
                     //console.log(key);
-                    if (key !== this.display.currentJudge) {
+                    if (keys[key] !== this.display.currentJudge) {
                         this.players[keys[key]].data.hand.push(jsonHandler.createWhiteCard(keys[key]));
                     }
                 }

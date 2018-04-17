@@ -7,7 +7,7 @@ module.exports = {
     },
     createWhiteCard: function (playerId) {
         return {
-            "cardId": 222, // This should be a query
+            "cardId": Math.round(Math.random() * 999), // This should be a query
             "body": "This is the contents of the card", // This should also be a query
             "owner": playerId // This is a player.json id
         }
