@@ -145,7 +145,7 @@ module.exports = function () {
                     this.display.players.push(this.players[Object.keys(this.players)[i]].data);
                     //console.log(this.players[Object.keys(this.players)[i]].data);
                 }
-                //console.log(this.display.players);
+                console.log(players);
             },
 
             updateCurrentDisplay: function () {
