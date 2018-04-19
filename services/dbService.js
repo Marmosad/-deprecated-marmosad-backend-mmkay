@@ -2,12 +2,14 @@ var instance;
 module.exports = function () {
     if(!instance){
         instance = {
+            connection: 0,
             start: function () {
                 var mysql = require('mysql');
-                var connection = mysql.createConnection({
+                connection = mysql.createConnection({
                     host: 'localhost',
-                    port: '443',
-                    database: 'cah'
+                    user : 'root',
+                    port: 3306,
+                    database: 'cards'
                 });
 
                 connection.connect(function (err) {
@@ -18,11 +20,19 @@ module.exports = function () {
                     console.log('connected as id ' + connection.threadId);
                 });
             },
-            getWhiteCards: function () { // gets rando white card, or many cards
+            getWhiteCard: function (id, callback) {
+                connection.query('SELECT * FROM white_card', function(err, results, fields){
+                    if(err) throw err;
 
+                    callback(results[0]);
+                });
             },
-            getBlackCard: function () { //gets rand black card
+            getBlackCard: function (id, callback) { //gets rand black card
+                connection.query('SELECT * FROM black_card', function(err, results, fields){
+                    if(err) throw err;
 
+                    callback(results[0]);
+                });
             }
         };
     }

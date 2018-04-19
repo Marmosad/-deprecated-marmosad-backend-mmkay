@@ -1,16 +1,27 @@
+var db = require('../services/dbService.js')();
+
 module.exports = {
-    createBlackCard: function () {
-        return {
-            "cardId": 111, // This should be a query
-            "body": "This is the contents of the card" // This should also be a query
-        }
+    createWhiteCard: function (playerId, callback) {
+        var id = Math.random() * 2;
+        db.getWhiteCard(1, function(card){
+            var newCard = {
+                cardId: card.id,
+                body: card.body,
+                owner: playerId
+            };
+            callback(newCard);
+        });
     },
-    createWhiteCard: function (playerId) {
-        return {
-            "cardId": 222, // This should be a query
-            "body": "This is the contents of the card", // This should also be a query
-            "owner": playerId // This is a player.json id
-        }
+
+    createBlackCard: function (callback) {
+        var id = Math.random() * 2;
+        db.getBlackCard(1, function(card){
+            var newCard = {
+                cardId: card.id,
+                body: card.body
+            };
+            callback(newCard);
+        });
     },
 
     initializeCurrentDisplay: function () {
@@ -25,8 +36,9 @@ module.exports = {
     createPlayer: function (playerName, playerId, socket) { //this only creates a player
         var hand = [];
         for(var i = 0;  i < 7; i++){ // TODO: 7x whiteCard.json, wait for db int
-            var newCard = this.createWhiteCard(playerId);
-            hand.push(newCard);
+            this.createWhiteCard(playerId, function(card){
+                hand.push(card);
+            });
         }
 
         return {
