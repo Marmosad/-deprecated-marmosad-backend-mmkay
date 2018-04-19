@@ -2,7 +2,7 @@ var instance;
 module.exports = function () {
     if(!instance){
         instance = {
-            connection: 0,
+            connection: null,
             start: function () {
                 var mysql = require('mysql');
                 connection = mysql.createConnection({

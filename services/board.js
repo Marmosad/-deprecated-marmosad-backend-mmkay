@@ -20,7 +20,7 @@ module.exports = function () {
             phase: 0,
             players: {},
             display: {
-                "blackCard": '', //This should be a black card object
+                "blackCard": null, //This should be a black card object
                 "submissions": [],
                 "currentJudge": '', // The player ID of the person who is the judge
                 "players": []
@@ -119,6 +119,8 @@ module.exports = function () {
                 if (this.phase !== this.Phases.four) {
                     return false;
                 }
+
+                // Adds a new black card to current display
                 var display = this.display;
                 var self = this;
                 jsonHandler.createBlackCard(function(card){
@@ -126,6 +128,8 @@ module.exports = function () {
                     self.updatePlayersInDisplay();
                     self.updateCurrentDisplay();
                 });
+
+                // Adds a new white card to each hand
                 this.display.submissions = [];
                 var key;
                 var keys = Object.keys(this.players);
@@ -140,11 +144,17 @@ module.exports = function () {
                     }
                 }
                 key = null;
+
+                // Sets current judge to not judge. Might not need in the future.
                 this.players[this.display.currentJudge].data.isJudge = false;
                 //console.log(Object.keys(this.players));
+
+                // Selects next judge
                 this.display.currentJudge = Object.keys(this.players)[Math.round((Object.keys(this.players).length - 1) * Math.random())];
                 //console.log(this.display.currentJudge + ' is judge');
                 this.players[this.display.currentJudge].data.isJudge = true;
+
+                // Start next round. This will be rearranged
                 this.updatePlayersInDisplay();
                 this.updateCurrentDisplay();
                 this.phase = this.Phases.submission;
