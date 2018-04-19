@@ -27,8 +27,12 @@ module.exports = function () {
                     callback(results[0]);
                 });
             },
-            getBlackCard: function (callback) { //gets rand black card
+            getBlackCard: function (id, callback) { //gets rand black card
+                connection.query('SELECT * FROM black_card', function(err, results, fields){
+                    if(err) throw err;
 
+                    callback(results[0]);
+                });
             }
         };
     }

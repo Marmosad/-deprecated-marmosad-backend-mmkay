@@ -13,11 +13,15 @@ module.exports = {
         });
     },
 
-    createBlackCard: function () {
-        return {
-            "cardId": 111, // This should be a query
-            "body": "This is the contents of the card" // This should also be a query
-        }
+    createBlackCard: function (callback) {
+        var id = Math.random() * 2;
+        db.getBlackCard(1, function(card){
+            var newCard = {
+                cardId: card.id,
+                body: card.body
+            };
+            callback(newCard);
+        });
     },
 
     initializeCurrentDisplay: function () {
@@ -33,7 +37,6 @@ module.exports = {
         var hand = [];
         for(var i = 0;  i < 7; i++){ // TODO: 7x whiteCard.json, wait for db int
             this.createWhiteCard(playerId, function(card){
-                console.log(card);
                 hand.push(card);
             });
         }

@@ -20,7 +20,7 @@ module.exports = function () {
             phase: 0,
             players: {},
             display: {
-                "blackCard": null, //This should be a black card object
+                "blackCard": '', //This should be a black card object
                 "submissions": [],
                 "currentJudge": '', // The player ID of the person who is the judge
                 "players": []
@@ -51,13 +51,17 @@ module.exports = function () {
             },
 
             startGame: function () {
-                this.display.blackCard = jsonHandler.createBlackCard();
+                var display = this.display;
+                var self = this;
+                jsonHandler.createBlackCard(function(card){
+                    display.blackCard = card;
+                    self.updatePlayersInDisplay();
+                    self.updateCurrentDisplay();
+                });
                 this.players[Object.keys(this.players)[0]].data.isJudge = true;
                 this.display.currentJudge = this.players[Object.keys(this.players)[0]].data.playerId;
                 //console.log(Object.keys(this.players)[0] + ' is the first judge'); // Should be io.emit
                 this.phase = this.Phases.submission;
-                this.updatePlayersInDisplay();
-                this.updateCurrentDisplay();
                 console.log('startGame :');
                 //console.log(this.display);
             },
@@ -115,7 +119,13 @@ module.exports = function () {
                 if (this.phase !== this.Phases.four) {
                     return false;
                 }
-                this.display.blackCard = jsonHandler.createBlackCard();
+                var display = this.display;
+                var self = this;
+                jsonHandler.createBlackCard(function(card){
+                    display.blackCard = card;
+                    self.updatePlayersInDisplay();
+                    self.updateCurrentDisplay();
+                });
                 this.display.submissions = [];
                 var key;
                 var keys = Object.keys(this.players);
@@ -123,7 +133,10 @@ module.exports = function () {
                 for (key in keys) {
                     //console.log(key);
                     if (key !== this.display.currentJudge) {
-                        this.players[keys[key]].data.hand.push(jsonHandler.createWhiteCard(keys[key]));
+                        console.log(key);
+                        jsonHandler.createWhiteCard(key, function(card){
+                            self.players[keys].data.hand.push();
+                        });
                     }
                 }
                 key = null;
@@ -145,7 +158,6 @@ module.exports = function () {
                     this.display.players.push(this.players[Object.keys(this.players)[i]].data);
                     //console.log(this.players[Object.keys(this.players)[i]].data);
                 }
-                console.log(players);
             },
 
             updateCurrentDisplay: function () {
