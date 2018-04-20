@@ -193,7 +193,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MatIconModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatFormFieldModule */],
                 __WEBPACK_IMPORTED_MODULE_15__angular_forms__["c" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */].withServerTransition({ appId: 'serverApp' }),
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_9__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_flex_layout__["a" /* FlexLayoutModule */]
@@ -583,6 +583,29 @@ var DisplayService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/core/game-board/dragAnimation.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return dragAnimation; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
+
+var dragAnimation = Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["k" /* trigger */])('dragState', [
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["h" /* state */])('up', Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["i" /* style */])({
+        opacity: '0.5',
+        transform: 'scale(0.7)'
+    })),
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["h" /* state */])('down', Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["i" /* style */])({
+        opacity: '1',
+        transform: 'scale(1)'
+    })),
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["j" /* transition */])('down => up', Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["e" /* animate */])('50ms ease-in')),
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["j" /* transition */])('up => down', Object(__WEBPACK_IMPORTED_MODULE_0__angular_animations__["e" /* animate */])('100ms ease-in')),
+]);
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/core/game-board/game-board.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -591,7 +614,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".game-board-card {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n}\r\n\r\n.blackCard {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n  background-color: #263237;\r\n  max-width: 14%;\r\n}\r\n\r\np{\r\n  color: #3b3e47;\r\n}\r\n\r\n.blackCardText{\r\n  color: white;\r\n}\r\n\r\n.blackCardId{\r\n  color: white;\r\n}\r\n\r\n.whiteCard {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n  max-width: 14%;\r\n}\r\n\r\n.whiteCard:hover {\r\n  border-bottom: #ff5b5b 0.5vw solid;\r\n  border-top: #ff5b5b 0vw solid;\r\n  /* box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22); */\r\n}\r\n\r\n.submissions {\r\n  padding: 0 0 0 0;\r\n}\r\n\r\n.hand {\r\n  padding: 0 0 0 0;\r\n}\r\n\r\n.controls {\r\n\r\n}\r\n\r\nbutton {\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n}\r\n\r\nbutton:hover {\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n  background-color: white;\r\n  color: #ff5b5b;\r\n  cursor: pointer;\r\n}\r\n", ""]);
+exports.push([module.i, ".game-board-card {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nh1 {\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n  background-color: #ff5b5b;\r\n  margin: 0;\r\n  text-align: center;\r\n  color: #3b3e47;\r\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n}\r\n\r\n.blackCard {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n  background-color: #263237;\r\n  max-width: 14%;\r\n}\r\n\r\np{\r\n  color: #3b3e47;\r\n}\r\n\r\n.blackCardText{\r\n  color: white;\r\n}\r\n\r\n.blackCardId{\r\n  color: white;\r\n}\r\n\r\n.whiteCard {\r\n  padding: 20px;\r\n  margin: 0 10px 0 10px;\r\n  -webkit-transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);\r\n  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\r\n  border-top: #ff5b5b 0.5vw solid;\r\n  max-width: 14%;\r\n}\r\n\r\n.whiteCard:hover {\r\n  border-bottom: #ff5b5b 0.5vw solid;\r\n  border-top: #ff5b5b 0vw solid;\r\n  /* box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22); */\r\n}\r\n\r\n.submissions {\r\n  overflow: hidden;\r\n  padding: 0 0 0 0;\r\n}\r\n\r\n.hand {\r\n  padding: 0 0 0 0;\r\n}\r\n\r\n.controls {\r\n\r\n}\r\n\r\nbutton {\r\n  background-color: #ff5b5b;\r\n  color: #3b3e47;\r\n  font-family: 'Fascinate', black, serif;\r\n  font-size: 3vh;\r\n}\r\n\r\nbutton:hover {\r\n  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);\r\n  background-color: white;\r\n  color: #ff5b5b;\r\n  cursor: pointer;\r\n}\r\n\r\n#ghost_SPOOOK {\r\n  opacity: 0.3;\r\n}\r\n", ""]);
 
 // exports
 
@@ -604,7 +627,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/game-board/game-board.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"2vh\">\r\n  <div class=\"game-board-top\"fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"submissions\">\r\n    <mat-card class=\"blackCard\" fxFlex (draggable)=\"true\" >\r\n      <p class=\"blackCardText\">{{blackCard.body}}</p>\r\n      <h3 class=\"blackCardId\">{{blackCard.cardId}}</h3>\r\n    </mat-card>\r\n    <mat-card class=\"whiteCard\" *ngFor=\"let card of submissions\" (draggable)=\"true\" fxFlex (click)=\"submitJudgement(card)\">\r\n      <p>{{card.body}}</p>\r\n      <h3>{{card.cardId}}</h3>\r\n    </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button (click)=\"startGame()\" mat-raised-button fxFlex>Start Game</button>\r\n    <button (click)=\"resetGame()\" mat-raised-button fxFlex>Reset Game</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"whiteCard\" *ngFor=\"let card of hand\" fxFlex (draggable)=\"true\" (click)=\"submitCard(card)\">\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n</mat-card>\r\n"
+module.exports = "<mat-card class=\"game-board-card\" id=\"game-board\" fxFill fxLayout=\"column\" fxLayoutAlign=\"start stretch\" fxLayoutGap=\"2vh\">\r\n  <div class=\"game-board-top\" fxFlex=\"4\">\r\n    <h1>Game Board</h1>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"submissions\" id=\"submissions\">\r\n    <mat-card class=\"blackCard\" fxFlex *ngIf=\"blackCard\">\r\n      <p class=\"blackCardText\">{{blackCard.body}}</p>\r\n      <h3 class=\"blackCardId\">{{blackCard.cardId}}</h3>\r\n    </mat-card>\r\n    <mat-card class=\"whiteCard\" id=\"{{card.owner}}\" *ngFor=\"let card of submissions\" (draggable)=\"true\" fxFlex\r\n              (click)=\"submitJudgement(card)\">\r\n      <p>{{card.body}}</p>\r\n      <h3>{{card.cardId}}</h3>\r\n    </mat-card>\r\n  </div>\r\n  <div fxFlex=\"10\" class=\"controls\" fxLayoutGap=\"10px\">\r\n    <button (click)=\"startGame()\" mat-raised-button fxFlex>Start Game</button>\r\n    <button (click)=\"resetGame()\" mat-raised-button fxFlex>Reset Game</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n    <button mat-raised-button fxFlex>Button</button>\r\n  </div>\r\n  <div fxFlex=\"39\" class=\"hand\" fxLayout=\"row\" fxLayoutGap=\"6px\" fxLayoutAlign=\"space-between stretch\">\r\n        <mat-card class=\"whiteCard\" id=\"{{i}}\" *ngFor=\"let card of hand; index as i\" fxFlex (click)=\"submitCard(card)\"\r\n                  (mousedown) = 'startDrag(i)' (mouseup) = 'endDrag(i)'>\r\n          <p>{{card.body}}</p>\r\n          <h3>{{card.cardId}}</h3>\r\n        </mat-card>\r\n  </div>\r\n</mat-card>\r\n"
 
 /***/ }),
 
@@ -619,6 +642,7 @@ module.exports = "<mat-card class=\"game-board-card\" fxFill fxLayout=\"column\"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__ = __webpack_require__("../../../../rxjs/_esm5/observable/fromEvent.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__ = __webpack_require__("../../../../rxjs/_esm5/observable/interval.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dragAnimation__ = __webpack_require__("../../../../../src/app/core/game-board/dragAnimation.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -628,6 +652,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var SPOPPY_GHOST = 'ghost_SPOOOK';
+
 
 
 
@@ -638,14 +664,22 @@ var GameBoardComponent = /** @class */ (function () {
     function GameBoardComponent(displayService, socketIoService) {
         this.displayService = displayService;
         this.socketIoService = socketIoService;
-        this.eventSource = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__["a" /* fromEvent */])(document, 'mousemove');
-        this.eventSource.pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["a" /* throttle */])(function (val) { return Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__["a" /* interval */])(20); })).subscribe(function (e) {
-            console.log(e.clientX);
-            console.log(e.clientY);
-        });
+        this.ghostCard = {
+            cardId: null,
+            body: '',
+            owner: SPOPPY_GHOST,
+        };
+        this.ghostExist = false;
+        this.draggedCard = null;
+        this.pointerPosition = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__["a" /* fromEvent */])(document, 'mousemove');
+        this.mouseUp = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__["a" /* fromEvent */])(document, 'mouseup');
+        this.dragItemClone = null;
+        this.dragItem = null;
+        this.cursorInSubmissions = false;
     }
     GameBoardComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.resize = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__["a" /* fromEvent */])(window, 'resize');
         this.displayService.getHandSubject.subscribe(function (hand) {
             _this.hand = hand;
             console.log(hand);
@@ -660,6 +694,83 @@ var GameBoardComponent = /** @class */ (function () {
         this.socketIoService.onReset().subscribe(function (data) {
             window.location.reload();
         });
+        this.trackPointerPosition();
+        this.trackMouseUp();
+        this.trackResize();
+        this.submissionDimensions = document.getElementById('submissions').getBoundingClientRect();
+    };
+    GameBoardComponent.prototype.trackPointerPosition = function () {
+        var _this = this;
+        this.pointerPosition.pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["a" /* throttle */])(function (val) { return Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__["a" /* interval */])(20); })).subscribe(function (e) {
+            _this.cursorX = e.clientX;
+            _this.cursorY = e.clientY;
+            _this.cursorInSubmissions = _this.cursorX > _this.submissionDimensions.left && _this.cursorX < _this.submissionDimensions.right &&
+                _this.cursorY > _this.submissionDimensions.top && _this.cursorY < (_this.submissionDimensions.top + _this.submissionDimensions.height);
+            if (_this.draggedCard !== null) {
+                if (_this.cursorInSubmissions) {
+                    _this.addGhost();
+                }
+                else {
+                    _this.removeGhost();
+                }
+            }
+            if (_this.dragItemClone !== null) {
+                _this.dragItemClone.style.left = _this.cursorX + 'px';
+                _this.dragItemClone.style.top = _this.cursorY + 'px';
+            }
+        });
+    };
+    GameBoardComponent.prototype.trackMouseUp = function () {
+        var _this = this;
+        this.mouseUp.subscribe(function (e) {
+            console.log('submit ' + _this.cursorInSubmissions);
+            if (_this.cursorInSubmissions) {
+                _this.submitCard(_this.draggedCard);
+                _this.draggedCard = null;
+                _this.removeGhost();
+            }
+            _this.endDrag();
+        });
+    };
+    GameBoardComponent.prototype.trackResize = function () {
+        var _this = this;
+        this.resize.pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["a" /* throttle */])(function (val) { return Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__["a" /* interval */])(20); })).subscribe(function (e) {
+            _this.submissionDimensions = document.getElementById('submissions').getBoundingClientRect();
+        });
+    };
+    GameBoardComponent.prototype.startDrag = function (i) {
+        this.submissionDimensions = document.getElementById('submissions').getBoundingClientRect();
+        if (this.isJudge) {
+            return;
+        }
+        this.draggedCard = this.hand[i];
+        console.log('drag start');
+        this.dragItem = document.getElementById(i.toString());
+        console.log(this.dragItem.cloneNode(true));
+        this.dragItemClone = this.dragItem.cloneNode(true);
+        this.dragItem.style.opacity = '0';
+        this.styleClone(this.dragItemClone, this.dragItem.getBoundingClientRect());
+        document.body.appendChild(this.dragItemClone);
+    };
+    GameBoardComponent.prototype.styleClone = function (clone, dimensions) {
+        clone.style.position = 'fixed';
+        clone.style.marginTop = '-' + (dimensions.height / 2) + 'px';
+        clone.style.marginLeft = '-' + (dimensions.width / 2) + 'px';
+        clone.style.height = dimensions.height + 'px';
+        clone.style.width = dimensions.width + 'px';
+        clone.style.left = this.cursorX + 'px';
+        clone.style.top = this.cursorY + 'px';
+        console.log(clone.style);
+    };
+    GameBoardComponent.prototype.endDrag = function () {
+        console.log('drag end');
+        if (this.dragItem !== null) {
+            this.dragItemClone.remove();
+            this.dragItem.style.opacity = '1';
+            this.dragItemClone = null;
+            this.dragItem = null;
+        }
+        this.draggedCard = null;
     };
     GameBoardComponent.prototype.startGame = function () {
         this.socketIoService.startGame();
@@ -668,20 +779,43 @@ var GameBoardComponent = /** @class */ (function () {
         this.socketIoService.resetGame();
     };
     GameBoardComponent.prototype.submitCard = function (card) {
-        if (!this.displayService.getIsJudge) {
+        if (!this.isJudge) {
             this.socketIoService.submitCard(card);
         }
     };
     GameBoardComponent.prototype.submitJudgement = function (card) {
-        if (this.displayService.getIsJudge) {
+        if (this.isJudge) {
             this.socketIoService.submitJudgement(card);
+        }
+    };
+    Object.defineProperty(GameBoardComponent.prototype, "isJudge", {
+        get: function () {
+            return this.displayService.getIsJudge;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GameBoardComponent.prototype.addGhost = function () {
+        if (!this.ghostExist && this.draggedCard !== null) {
+            this.submissions.push(this.ghostCard);
+            this.ghostExist = true;
+        }
+    };
+    GameBoardComponent.prototype.removeGhost = function () {
+        if (this.ghostExist) {
+            var ghostIndex = this.submissions.findIndex(function (elem) {
+                return (elem.owner === SPOPPY_GHOST);
+            });
+            this.submissions.splice(ghostIndex, 1);
+            this.ghostExist = false;
         }
     };
     GameBoardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-game-board',
             template: __webpack_require__("../../../../../src/app/core/game-board/game-board.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/core/game-board/game-board.component.css")]
+            styles: [__webpack_require__("../../../../../src/app/core/game-board/game-board.component.css")],
+            animations: [__WEBPACK_IMPORTED_MODULE_6__dragAnimation__["a" /* dragAnimation */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__display_service_display_service_service__["a" /* DisplayService */], __WEBPACK_IMPORTED_MODULE_2__socket_io_socket_io_service__["a" /* SocketIoService */]])
     ], GameBoardComponent);
@@ -785,7 +919,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/global-navbar/global-navbar-elements/global-navbar-elements.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"global-navbar-elements\">\n  <div class=\"center-elements\">\n    <img src=\"assets/goose.svg\" class=\"goose-icon\"> <h1>Marmosad</h1>\n  </div>\n</div>\n"
+module.exports = "<div class=\"global-navbar-elements\">\n  <div class=\"center-elements\">\n    <img src=\"assets/goose.svg\" class=\"goose-icon\"><h1>Marmosad</h1>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1299,8 +1433,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_18" /* enableProdMode */])();
 }
-Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
-    .catch(function (err) { return console.log(err); });
+document.addEventListener('DOMContentLoaded', function () {
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
+        .catch(function (err) { return console.log(err); });
+});
 
 
 /***/ }),
