@@ -51,13 +51,17 @@ module.exports = function () {
             },
 
             startGame: function () {
-                this.display.blackCard = jsonHandler.createBlackCard();
+                var display = this.display;
+                var self = this;
+                jsonHandler.createBlackCard(function(card){
+                    display.blackCard = card;
+                    self.updatePlayersInDisplay();
+                    self.updateCurrentDisplay();
+                });
                 this.players[Object.keys(this.players)[0]].data.isJudge = true;
                 this.display.currentJudge = this.players[Object.keys(this.players)[0]].data.playerId;
                 //console.log(Object.keys(this.players)[0] + ' is the first judge'); // Should be io.emit
                 this.phase = this.Phases.submission;
-                this.updatePlayersInDisplay();
-                this.updateCurrentDisplay();
                 console.log('startGame :');
                 //console.log(this.display);
             },
@@ -115,23 +119,42 @@ module.exports = function () {
                 if (this.phase !== this.Phases.four) {
                     return false;
                 }
-                this.display.blackCard = jsonHandler.createBlackCard();
+
+                // Adds a new black card to current display
+                var display = this.display;
+                var self = this;
+                jsonHandler.createBlackCard(function(card){
+                    display.blackCard = card;
+                    self.updatePlayersInDisplay();
+                    self.updateCurrentDisplay();
+                });
+
+                // Adds a new white card to each hand
                 this.display.submissions = [];
                 var key;
                 var keys = Object.keys(this.players);
                 //console.log(keys);
                 for (key in keys) {
                     //console.log(key);
-                    if (keys[key] !== this.display.currentJudge) {
-                        this.players[keys[key]].data.hand.push(jsonHandler.createWhiteCard(keys[key]));
+                    if (key !== this.display.currentJudge) {
+                        console.log(key);
+                        jsonHandler.createWhiteCard(key, function(card){
+                            self.players[keys].data.hand.push();
+                        });
                     }
                 }
                 key = null;
+
+                // Sets current judge to not judge. Might not need in the future.
                 this.players[this.display.currentJudge].data.isJudge = false;
                 //console.log(Object.keys(this.players));
+
+                // Selects next judge
                 this.display.currentJudge = Object.keys(this.players)[Math.round((Object.keys(this.players).length - 1) * Math.random())];
                 //console.log(this.display.currentJudge + ' is judge');
                 this.players[this.display.currentJudge].data.isJudge = true;
+
+                // Start next round. This will be rearranged
                 this.updatePlayersInDisplay();
                 this.updateCurrentDisplay();
                 this.phase = this.Phases.submission;
@@ -145,7 +168,6 @@ module.exports = function () {
                     this.display.players.push(this.players[Object.keys(this.players)[i]].data);
                     //console.log(this.players[Object.keys(this.players)[i]].data);
                 }
-                //console.log(this.display.players);
             },
 
             updateCurrentDisplay: function () {
