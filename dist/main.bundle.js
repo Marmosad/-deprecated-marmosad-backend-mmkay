@@ -583,7 +583,7 @@ var DisplayService = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/core/game-board/dragAnimation.ts":
+/***/ "../../../../../src/app/core/game-board/drag-animation.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -642,7 +642,7 @@ module.exports = "<mat-card class=\"game-board-card\" id=\"game-board\" fxFill f
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_fromEvent__ = __webpack_require__("../../../../rxjs/_esm5/observable/fromEvent.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_interval__ = __webpack_require__("../../../../rxjs/_esm5/observable/interval.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dragAnimation__ = __webpack_require__("../../../../../src/app/core/game-board/dragAnimation.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__drag_animation__ = __webpack_require__("../../../../../src/app/core/game-board/drag-animation.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -815,7 +815,7 @@ var GameBoardComponent = /** @class */ (function () {
             selector: 'app-game-board',
             template: __webpack_require__("../../../../../src/app/core/game-board/game-board.component.html"),
             styles: [__webpack_require__("../../../../../src/app/core/game-board/game-board.component.css")],
-            animations: [__WEBPACK_IMPORTED_MODULE_6__dragAnimation__["a" /* dragAnimation */]]
+            animations: [__WEBPACK_IMPORTED_MODULE_6__drag_animation__["a" /* dragAnimation */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__display_service_display_service_service__["a" /* DisplayService */], __WEBPACK_IMPORTED_MODULE_2__socket_io_socket_io_service__["a" /* SocketIoService */]])
     ], GameBoardComponent);

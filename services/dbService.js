@@ -6,10 +6,10 @@ module.exports = function () {
             start: function () {
                 var mysql = require('mysql');
                 connection = mysql.createConnection({
-                    host: 'localhost',
-                    user : 'root',
-                    port: 3306,
-                    database: 'cards'
+                    host     : "35.194.85.74",
+                    user     : "root",
+                    password : "marmoExtraSad3",
+                    database: 'cah'
                 });
 
                 connection.connect(function (err) {
